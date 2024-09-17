@@ -23,7 +23,7 @@ Many unsupervised classification models based on this dataset are available in t
     
  In this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to denoise the signals before starting the classification process. 
 
- Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy envionement.</b> And identifying anomalies, failures, breakdowns.    
+ Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy environment.</b> And identifying anomalies, failures, breakdowns.    
     
 Instead of classifying various machines or types of machines: pump, fan, valve, slider, ...  we will:
 
