@@ -167,16 +167,16 @@ Beamforming can be combined with classic Noise Reduction techniques as we will s
     
 The 68 mm diameter microphone array is small and the number of microphones: 8 is an overkill, and it will oversample acoustic waves at low frequency. When implementing MVDR beamforming we will introduce significant regularization which will limit the Directivity Index. <b> After multiple experimentation, strong regularization was needed... even minor microphone mismatch in magnitude and phase, can significantly degrade the performance of the beamformer. </b>
 
-R=0.068/2; <br> % Radius of the circular array.
-%Circular array geometry <br>
-- RP(1,:)= [R                   0                        0.00];
-- RP(2,:)= [R*cos(45*pi/180)    R*sin(45*pi/180)         0.00];
-- RP(3,:)= [R*cos(90*pi/180)    R*sin(90*pi/180)         0.00];
-- RP(4,:)= [R*cos(135*pi/180)   R*sin(135*pi/180)        0.00];
-- RP(5,:)= [R*cos(pi)           0                        0.00];
-- RP(6,:)= [R*cos(225*pi/180)   R*sin(225*pi/180)        0.00];
-- RP(7,:)= [R*cos(270*pi/180)   R*sin(270*pi/180)        0.00];
-- RP(8,:)= [R*cos(315*pi/180)   R*sin(315*pi/180)        0.00];
+<i>R=0.068/2</i>  % Radius of the circular array in meter (m) <br>
+% Circular array geometry <br>
+- <i> RP(1,:)= [R                   0                        0.00]
+- RP(2,:)= [R*cos(45*pi/180)    R*sin(45*pi/180)         0.00]
+- RP(3,:)= [R*cos(90*pi/180)    R*sin(90*pi/180)         0.00]
+- RP(4,:)= [R*cos(135*pi/180)   R*sin(135*pi/180)        0.00]
+- RP(5,:)= [R*cos(pi)           0                        0.00]
+- RP(6,:)= [R*cos(225*pi/180)   R*sin(225*pi/180)        0.00]
+- RP(7,:)= [R*cos(270*pi/180)   R*sin(270*pi/180)        0.00]
+- RP(8,:)= [R*cos(315*pi/180)   R*sin(315*pi/180)        0.00]</i>
 
     
 |<p align="center"> <img src="Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="DI_90deg_sig5_1em4.png" width="400"  /> </p> |
