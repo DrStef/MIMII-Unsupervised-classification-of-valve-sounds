@@ -184,6 +184,38 @@ Theoretical aspects for computing the filters are presented in Ward [], chapter 
 The computation of the filters is left as an exercise. Some experimentation will be needed for regularizing the various ill-conditionned matrices. 
 
 
+
+
+If we were to design a sensor for monitoring industrial machinery sounds in a noisy environment, then a multi-microphone sensor, i.e., a microphone array, would make absolute sense.
+
+Here, we are going to transform the TAMAGO microphone array into a diagnostic sensor, employing proper beamforming filters and a noise reduction strategy.
+
+#### Beamforming
+
+Beamforming is a noise reduction technique based on spatial filtering. Essentially, multiple microphones capture acoustic waves, and their outputs are combined to increase the gain in a specific direction. Beamforming can be combined with classic noise reduction techniques, as we will see in the next section.
+
+The 68 mm diameter microphone array, though small, with its eight microphones, represents an overkill, leading to oversampling of acoustic waves at low frequencies, which creates the following issues:
+
+- With too many microphones, optimal MVDR beamforming filters can achieve very high gains for maximum directivity, typically +50 or +60 dB. This significantly degrades the White Noise Gain (WNG), making their practical implementation problematic.
+- Minor mismatches in magnitude and phase among the microphones can further degrade the beamformer's performance significantly.
+
+
+Therefore, when implementing the MVDR beamforming with the TAMAGO microphone array, we will introduce substantial regularization at low frequencies, which will compromise the Directivity Index at these frequencies.
+
+#### Computing Optimal MVDR Beamforming Filters
+
+The 8-microphone array is embedded within a rigid egg shape. It cannot be treated as a free-field array, except at low frequencies where the acoustic wavelength is very large compared to the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and will use analytical or semi-analytical models to characterize the acoustic field diffracted by the "egg". This will be explored in PART II. Once the simulation is complete, we will develop a new MIMII denoised valve dataset.
+
+We compute two sets of filters:
+
+- Main beam: optimal MVDR beamforming filters for the main beam and channel, assuming an isotropic noise field. These are filters WfH
+     in the block diagram in the next section.
+- "Noise channel": filters for a non-adaptive generalized sidelobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. These are filters WvHB
+     in the block diagram.
+
+The code for generating these two sets of filters is confidential. Theoretical aspects for computing the filters are presented in Ward [citation], Chapter II: "Superdirective Microphone Arrays". The computation of the filters is left as an exercise. Some experimentation will be necessary for regularizing the various ill-conditioned matrices.
+
+
 <i>R=0.068/2</i>  % Radius of the circular array in meter (m) <br>
 % Circular array geometry <br>
 - <i> RP(1,:)= [R                   0                        0.00]
