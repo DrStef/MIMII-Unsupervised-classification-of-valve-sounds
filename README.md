@@ -17,13 +17,14 @@ Industrial machinery often experiences failures or breakdowns, leading to consid
 Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. <br> 
 Hitachi Ltd, has developped the MIMII dataset to the classification sounds of industrial machines operating under both normal and faulty conditions in actual factory settings. With: 
 - subsets of machines: pump, valves, slider, fan
-- subsets of functioning conditions: normal and abnormal.
+- subsets of functioning conditions: normal and abnormal
+- background noise
 
 MIMII stands for:  Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br>
 Many unsupervised classification models based on this dataset are available in the literature or on Github. We will provide links and references. 
 <br>
-Based on this dataset, we develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array.     <br>
-In this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to denoise the signals before starting the classification process. 
+We develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array.     <br>
+Contrarily to most clissifiation available in the literature, in this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to <b>denoise</b> the signals before starting the classification process. 
 
 Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy environment.</b> And then develop the classification model for automotically identifying anomalies, failures, breakdowns.    
     
