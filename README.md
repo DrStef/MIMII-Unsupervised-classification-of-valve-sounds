@@ -154,38 +154,6 @@ Fortunately, in most recordings we reviewed from the -6dB_Valve dataset, the amb
 <br>
 <span style="color:#4169E1">  
   
-If we were to design a sensor for monitoring industrial machinery sounds, in a noisy envionement, then a multi-microphone sesnor i.e. a microphone array, makes absolute sense. <br>
-Here we are going to turn the TAMAGO microphone array into a diagnosis sensor. With proper beamforming filters and noise reduction strategy. 
-<br>    
-    
-    
-####  Beamforming
-    
-Beamforming is a noise reduction technique based on <b><i>spatial filtering</i></b>. Basically the multiple microphones capture acoustic waves and their outputs are combined to increase the gain in a specific direction. 
-Beamforming can be combined with classic Noise Reduction techniques as we will see in the next section.       
-    
-The 68 mm diameter microphone array is small and the number of microphones: 8 is an overkill, and it will oversample acoustic waves at low frequency and creates the follwing issues: 
-- with too many microphones, optimal MVDR beamfoming filters gain can be very high for achieving maximum directivity. Typically +50, +60dB which would degrade so much the WNG(White Noise Gain) taht it makes their implementation impossible.
-- minor microphones mismatch in magnitude and phase, can further significantly degrade the performance of the beamformer.
-
-Therefore, when implementing the MVDR beamforming with the TAMAGO micropone array, we will introduce significant regularization at low frequency, which will degrade the Directivity Index at low frequency. 
-
-
-#### Computing optimal MVDR beamforming filters   
-    
-The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.  Once the simulation is ready we will build a new MIMII denoised valve dataset.  
-    
-We compute two sets of filters:  
-- Main beam: optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$ in the block diagram in the next section. 
-- "Noise channel": filters of a non adaptive generalized side lobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. Filters $W^H_{v}B$ in the block diagram. 
-
-The code for generating the 2 sets of filters is confidential. 
-Theoretical aspects for computing the filters are presented in Ward [], chapter II: <i> "Superdirective Microphone Arrays" </i>. 
-The computation of the filters is left as an exercise. Some experimentation will be needed for regularizing the various ill-conditionned matrices. 
-
-
-
-
 If we were to design a sensor for monitoring industrial machinery sounds in a noisy environment, then a multi-microphone sensor, i.e., a microphone array, would make absolute sense.
 
 Here, we are going to transform the TAMAGO microphone array into a diagnostic sensor, employing proper beamforming filters and a noise reduction strategy.
@@ -208,12 +176,10 @@ The 8-microphone array is embedded within a rigid egg shape. It cannot be treate
 
 We compute two sets of filters:
 
-- Main beam: optimal MVDR beamforming filters for the main beam and channel, assuming an isotropic noise field. These are filters WfH
-     in the block diagram in the next section.
-- "Noise channel": filters for a non-adaptive generalized sidelobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. These are filters WvHB
-     in the block diagram.
+- Main beam: optimal MVDR beamforming filters for the main beam and channel, assuming an isotropic noise field. These are filters $W^H_f$ in the block diagram in the next section.
+- "Noise channel": filters for a non-adaptive generalized sidelobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. These are filters  $W^H_{v}B$ in the block diagram.
 
-The code for generating these two sets of filters is confidential. Theoretical aspects for computing the filters are presented in Ward [citation], Chapter II: "Superdirective Microphone Arrays". The computation of the filters is left as an exercise. Some experimentation will be necessary for regularizing the various ill-conditioned matrices.
+The code for generating these two sets of filters is confidential. <br> Theoretical aspects for computing the filters are presented in Ward [citation], Chapter II: "Superdirective Microphone Arrays". <br> The computation of the filters is left as an exercise. Some experimentation will be necessary for regularizing the various ill-conditioned matrices.
 
 
 <i>R=0.068/2</i>  % Radius of the circular array in meter (m) <br>
