@@ -125,29 +125,29 @@ https://www.sifi.co.jp/en/product/microphone-array/
 
 <span style="color:#4169E1">  
     
-In many models and results developped in the DCASE2020, DCASE2022 challenges, that include single channels of the MIMII dataset, noise and reverberation are often reported as a contributing factor for poor classification accuracy.  
-<br>
-If we were to design a system for acquiring industrial sounds, a microphone array is an ideal tool to:
+In various models and results developed during the DCASE2020 and DCASE2022 challenges, which included single channels from the MIMII dataset, noise and reverberation were often identified as significant factors contributing to poor classification accuracy.
 
-- attenuate reverberations.
-- attenuate ambient noise.
+When designing a system for capturing industrial sounds, a microphone array would be an optimal choice to:
 
-with the ability to steer a beam in the direction of interest: the sound source to be monitored.   
+- Attenuate reverberations.
+- Attenuate ambient noise.
 
-Can a beamformer get rid of ambient noise artifically added to the sound of interest ? 
+Additionally, it offers the capability to focus a beam towards the sound source of interest.
 
-Backround noise added to sound sources of interest in the MIMII dataset was recorded with the same TAMAGO 8 microphones array and then all channels were mixed under 3 conditions: 
+Can a beamformer eliminate ambient noise artificially added to the sound of interest?
 
-- SNR= 6 dB
-- SNR= 0 dB
-- SNR= -6 dB  (worst case scenario)
+Background noise that was added to the sound sources of interest in the MIMII dataset was captured using the same TAMAGO 8-microphone array, and subsequently, all channels were mixed under the following conditions:
 
-We will denoise and classify signals in the SNR= -6 dB scenario (the worst case scenario).   
+- SNR = 6 dB
+- SNR = 0 dB
+- SNR = -6 dB (representing the worst-case scenario)
 
-- Assuming that microphone 1 is in the direction of the sound source of interest (here the valve), and that some background noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
-- if some isotropic ambient noise was recorded with the array, in this case the beamformer will be efficient
+We plan to denoise and classify signals under the SNR = -6 dB condition, which is the most challenging scenario.
 
-Fortunately in most recordigs we listened to in the -6dB_Valve dataset, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assume that the array is in free field.  
+- Assuming microphone 1 is directed towards the sound source of interest (in this case, a valve), and if background noise was also recorded from that direction, it would be difficult to denoise the recordings effectively.
+- However, if the ambient noise recorded by the array is isotropic, the beamformer would be more efficient in this scenario.
+
+Fortunately, in most recordings we reviewed from the -6dB_Valve dataset, the ambient noise appears to be relatively isotropic, or at least, the primary noise source is not directly at 0 degrees. Consequently, the MVDR beamformer should effectively attenuate the ambient noise, particularly at frequencies below 1000-1500 Hz, assuming the array operates in a free field.
 
 ##  Multi-Microphone diagnosis sensor.
 
