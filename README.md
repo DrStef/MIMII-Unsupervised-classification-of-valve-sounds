@@ -170,6 +170,20 @@ The 68 mm diameter microphone array is small and the number of microphones: 8 is
 
 Therefore, when implementing the MVDR beamforming with the TAMAGO micropone array, we will introduce significant regularization at low frequency, which will degrade the Directivity Index at low frequency. 
 
+
+#### Computing optimal MVDR beamforming filters   
+    
+The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.  Once the simulation is ready we will build a new MIMII denoised valve dataset.  
+    
+We compute two sets of filters:  
+- Main beam: optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$ in the block diagram in the next section. 
+- "Noise channel": filters of a non adaptive generalized side lobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. Filters $W^H_{v}B$ in the block diagram. 
+
+The code for generating the 2 sets of filters is confidential. 
+Theoretical aspects for computing the filters are presented in Ward [], chapter II: <i> "Superdirective Microphone Arrays" </i>. 
+The computation of the filters is left as an exercise. Some experimentation will be needed for regularizing the various ill-conditionned matrices. 
+
+
 <i>R=0.068/2</i>  % Radius of the circular array in meter (m) <br>
 % Circular array geometry <br>
 - <i> RP(1,:)= [R                   0                        0.00]
@@ -185,9 +199,15 @@ Therefore, when implementing the MVDR beamforming with the TAMAGO micropone arra
 |<p align="center"> <img src="Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="DI_90deg_sig5_1em4.png" width="400"  /> </p> |
 |       ---       |         ---       | 
 | <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
-    
+
+Beamforming Filters in the frequency domain: real_part and imaginary part are stored in the following files: 
+
+Filters:  512 points, Fs= 16000 Hz, double-sided ! 
+Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
     
 ####  Beampatterns
+
+We can plot the beampatterns in the horizintal plane v. frequency : 
     
 | <p align="center"> <img src="Directivity_HorizontalPlan.png" width="350"  /> </p> |  
 |       ---       |       
@@ -195,24 +215,13 @@ Therefore, when implementing the MVDR beamforming with the TAMAGO micropone arra
     
 
 The main beam is steered at 000 degrees. In the valve direction. <br>
-Beamforming Filters in the frequency domain: real_part and imaginary part are stored in the following files: 
 
-Filters:  512 points, Fs= 16000 Hz, double-sided ! 
-
-Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
-
-
-Computing optimal MVDR beamforming filters   
     
-The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.  Once the simulation is ready we will build a new MIMII denoised valve dataset.  
     
-We compute two sets of filters:  
-- Main beam: optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$ in the block diagram in the next section. 
-- "Noise channel": filters of a non adaptive generalized side lobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. Filters $W^H_{v}B$ in the block diagram. 
+|<p align="center"> <img src="Beampattern_500Hz.png" width="250"  /> </p> |  <p align="center"> <img src="Beampattern_1000Hz.png" width="250"  /> </p> |   <p align="center"> <img src="Beampattern_4500Hz.png" width="250"  /> </p>                       |
+|       ---       |         ---       |  ---  |
+| <center> <b><i> Beampattern_500Hz  </i></b> </center> | <center> <b><i> Beampattern_1000Hz </i></b> </center> |   <center> <b><i> Beampattern_4500Hz </i></b> </center> |
 
-The code for generating the 2 sets of filters is confidential. 
-Theoretical aspects for computing the filters are presented in Ward [], chapter II: <i> "Superdirective Microphone Arrays" </i>. 
-The computation of the filters is left as an exercise. Some experimentation will be needed for regularizing the various ill-conditionned matrices. 
 
 #### Generalized Side Lobe Canceller 
 
