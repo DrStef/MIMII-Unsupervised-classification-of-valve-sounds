@@ -92,8 +92,6 @@ Part of this dataset: Single channel microphone only, plus Toy car, Toy conveyor
 https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds <br>
 https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring    
     
-
-    
 #### Microphone Array     
     
 The MIMII dataset was recorded with the follwing 8-microphones array:  <br> 
@@ -159,7 +157,7 @@ If we were to design a sensor for monitoring industrial machinery sounds in a no
 
 Here, we are going to transform the TAMAGO microphone array into a diagnostic sensor, employing proper beamforming filters and a noise reduction strategy.
 
-#### Beamforming
+### Beamforming
 
 Beamforming is a noise reduction technique based on spatial filtering. Essentially, multiple microphones capture acoustic waves, and their outputs are combined to increase the gain in a specific direction. Beamforming can be combined with classic noise reduction techniques, as we will see in the next section.
 
@@ -171,7 +169,7 @@ The 68 mm diameter microphone array, though small, with its eight microphones, r
 
 Therefore, when implementing the MVDR beamforming with the TAMAGO microphone array, we will introduce substantial regularization at low frequencies, which will compromise the Directivity Index at these frequencies.
 
-#### Computing Optimal MVDR Beamforming Filters
+### Computing Optimal MVDR Beamforming Filters
 
 The 8-microphone array is embedded within a rigid egg shape. It cannot be treated as a free-field array, except at low frequencies where the acoustic wavelength is very large compared to the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and will use analytical or semi-analytical models to characterize the acoustic field diffracted by the "egg". This will be explored in PART II. Once the simulation is complete, we will develop a new MIMII denoised valve dataset.
 
@@ -204,7 +202,7 @@ Beamforming Filters in the frequency domain: real_part and imaginary part are st
 Filters:  512 points, Fs= 16000 Hz, double-sided ! 
 Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
     
-####  Beampatterns
+###  Beampatterns
 
 We can plot the beampatterns in the horizintal plane v. frequency : 
     
@@ -221,8 +219,9 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 |       ---       |         ---       |  ---  |
 | <center> <b><i> Beampattern_500Hz  </i></b> </center> | <center> <b><i> Beampattern_1000Hz </i></b> </center> |   <center> <b><i> Beampattern_4500Hz </i></b> </center> |
 
+<br>
 
-#### Generalized Side Lobe Canceller 
+### Generalized Side Lobe Canceller 
 
 We will use a fixed beamforming approach. The fixed GSC strategy is equivalent to a multi-channel Wiener gain. But instead of implementing a spectral difference, we can replace it with more advanced NR gains and evaluation of a priori_SNR. 
 
@@ -247,7 +246,7 @@ Initially, we will approximate without a "valve activity detector" because much 
 
 The GSC might introduce distortion into the valve sound. We will assess whether this affects the accuracy of the classification model. Such added distortion could be a significant issue for applications like Automatic Speech Recognition (ASR).
 
-#### Pseudo-Real-Time Implementation:
+### Pseudo-Real-Time Implementation:
 
 Frame-by-Frame Processing: We implement this with overlap-add, sliding an NFFT-length window over all 10-second signals with a 66% overlap. We compute the FFT, apply beamforming, and noise reduction gain in the frequency domain, then reconstruct the denoised output signals frame by frame using an IFFT.
 
