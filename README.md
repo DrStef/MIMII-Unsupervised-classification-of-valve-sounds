@@ -88,7 +88,7 @@ https://zenodo.org/records/3384388
 <span style="color:#4169E1">  
 Part of this dataset: Single channel microphone only, plus Toy car, Toy conveyor, was used in the DCASE 2020 Challenges in 2020 and in the following years.  
     
-https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds
+https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds <br>
 https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring    
     
 
