@@ -268,32 +268,21 @@ The procedure is available in the Jupyter Notebook:  <b><i>Part I: Preliminary A
 
 <br> 
 <span style="color:#4169E1">  
-    
-Just like in speech enhancements, for optimum performance, the second stage of the denoising algorithm, must stop collecting noise frames when the valve is active. 
-Therefore we design a VAD. Not voice activity detection but "Valve Activity Detection". 
-    
-We created two datasets of 512 points mono sound frames, 32 ms, sampled at fs= 16kHz. 
-    
-- Valve sound frames: collected in the <b>6dB SNR</b> dataset, Normal, id00, id02, id04, id06. <br>
-  Ideally we would like to have access to valve sounds in silent background, but this data is not available. We had access to "noisy" valve sound frames only, the reason why we selected the best SNR data available.     
-- Background noise frames: collected in the <b>-6dB SNR</b> dataset, Normal, id00, id02, id04, id06 when valves are not active. 
-    
-In this notebook we will investigate: 
-    
-- low complexity VAD models based on Machine Learning. These models will be used in our 2-stages Noise Reduction algorithm. 
-- high complexity models based on advanced features and Deep Learning.  
-    
-The low complexity models are the priority for proceeding with Noise Reduction. <br> 
-Notebooks will be updated on a regular basis with more advanced models. 
-  
-    
-<span style="color:#4169E1">  
 
-For designing the valve activity detector we will: <br>
-- build labeled datasets of background noise and valve sounds. Ideally we should have access to valve sound without any noise.   
-- 32 ms frames. Nfft=512 bins.  
-- compute STFT, mel-spectrograms or wavelets transforms.
-- build a Deep Learning model.  CNN.   
+Just like in speech enhancement algorithms, for optimal performance, the second stage of the denoising process must cease collecting noise frames when the valve is active. Therefore, we design a VAD, not for Voice Activity Detection, but for "Valve Activity Detection".
+
+Ideally, we should have access to valve sounds without any noise. We built labeled datasets of background noise and valve sounds consisting of 512-point mono sound frames, each lasting 32 ms, sampled at 16 kHz. 
+ 
+- Valve sound frames: collected from the 6 dB SNR dataset, specifically Normal, id00, id02, id04, id06. Ideally, we would have access to valve sounds against a silent background, but such data is not available. We had access only to "noisy" valve sound frames, which is why we selected the best SNR data available.
+- Background noise frames: collected from the -6 dB SNR dataset, Normal, id00, id02, id04, id06, when valves are inactive.
+
+In this notebook, we will explore:
+
+- Low-complexity VAD models based on Machine Learning. These models will be utilized in our two-stage Noise Reduction algorithm.
+- High-complexity models leveraging advanced features:  Short-Time Fourier Transforms (STFT), mel-spectrograms, or wavelet transforms and Deep Learning, specifically a Convolutional Neural Network (CNN).
+
+The low-complexity models are the priority for proceeding with Noise Reduction. Notebooks will be updated regularly with more advanced models.
+
 
 ##   References 
 
