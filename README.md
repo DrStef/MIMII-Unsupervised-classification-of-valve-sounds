@@ -87,7 +87,6 @@ https://zenodo.org/records/3384388
 Part of this dataset: Single channel microphone only, plus Toy car, Toy conveyor, was used in the DCASE 2020 Challenges in 2020 and in the following years.  
     
 https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds
-
 https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring    
     
 
@@ -96,7 +95,6 @@ https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detectio
     
 The MIMII dataset was recorded with the follwing 8-microphones array:  <br> 
 
-    
 | <p align="center"> <img src="MIMII_Microphone_array.png" width="300"  /> </p> |  <p align="center"> <img src="https://github.com/DrStef/MIMII/blob/main/Tamago_egg.png" width="200"  /> </p> |   
 | ---       |   ---  |   
 | <center> <b><i> The circular microphone array <br> from [1] </i></b> </center> |   <center> <b><i> The Tamago concept <br> from https://www.sifi.co.jp/en/product/microphone-array/ </i></b> </center> |     
@@ -105,25 +103,21 @@ The microphone array is embedded in a hard "egg shape" in a vertical position. F
 - an approximation of the egg shape by a prolate spheroid providing an analytical solution of the ascoutic field 
 - or a Boundary Element Model 
     
-We may work on an analytical model, the prolate spheroid but it will take some time. <span style="color:#900C3F">  At the moment we will treat the 8-microphone array in free field. It is an approximation, and the MVDR beamformer will perform properly at low frequency when the acoustic wavelength is very large compared with the size of the egg, but it will poorly perform in the medium and high frequency range.  </span>
+We may work on an analytical model, the prolate spheroid, but it will take some time. <span style="color:#900C3F">  At the moment we will treat the 8-microphone array in free field. It is an approximation, and the MVDR beamformer will perform properly at low frequency when the acoustic wavelength is very large compared with the size of the egg, but it will poorly perform in the medium and high frequency range up to 8kHz.  </span>
    
     
 The configuration for recording the various machines is presented below.  
     
 | <p align="center"> <img src="MIMII_Microphone_array_setup.png" width="400"  /> </p> |  
 | ---       |   
-| <center> <b><i> Recording configuration with the circular microphone array <br> from [1] </i></b> </center> |      
+| <center> <b><i> Recording configuration with the circular microphone array <br> from [1] </i></b> </center> |     
+
+We will work with the Valve dataset only, therefore with a beamformer steered at 000 deg.  
     
 https://www.sifi.co.jp/en/product/microphone-array/
     
 Index Terms  
 Machine sound dataset, Acoustic scene classification, Anomaly detection, Unsupervised anomalous sound detection  
-
-
-Challenges have been closed for a while 
-Our approach is different.    
-    
-
     
 - SNR= 6 dB
 - SNR= 0 dB
@@ -149,8 +143,10 @@ with the ability to steer a beam in the direction of interest: the sound source 
 
 Can a beamformer get rid of ambient noise artifically added to the sound of interest ? 
     
-- Assuming mic 1 is in the direction of the source, and that some noise was recorded in the direction of microphone number 1, it will be difficult to denoise the recording.  
+- Assuming mic 1 is in the direction of the source, and that some noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
 - if some isotropic ambient noise was recorded, in this case the beamformer will be efficient
+
+Fortunately is most recordigs we listened to, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should attanuate the ambient noise. At least at low frequencies under 1000 Hz since w assume the array in free field.  
 
 ##  Multi-Microphone diagnosis sensor.
 
@@ -158,9 +154,8 @@ Can a beamformer get rid of ambient noise artifically added to the sound of inte
 <span style="color:#4169E1">  
     
     
-If we were to design a sensor for monitoring industrial machinery sounds, in a noisy envionement, then a multi-microphone sesnor i.e. a microphone array, makes absolute sense. 8 microphones might be an overkill, but 6 microphones in a small form factor would do a good job. 
-    Here we are going to turn the TAMAGO microphone array in a diagnosis sensor. 
-    With proper beamforming filters and noise reduction strategy. 
+If we were to design a sensor for monitoring industrial machinery sounds, in a noisy envionement, then a multi-microphone sesnor i.e. a microphone array, makes absolute sense. <br>
+Here we are going to turn the TAMAGO microphone array in a diagnosis sensor. With proper beamforming filters and noise reduction strategy. 
 <br>    
     
     
