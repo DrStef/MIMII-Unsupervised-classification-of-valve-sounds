@@ -241,29 +241,27 @@ We extract the block diagram.
 | <center> <b><i> GSC Block-Diagram from [6] </i></b> </center> |       
     
 
-We propose a pseudo-real time implementation.     
-A "valve activity detector" would be needed when performing the spectral subtraction: when the valve is active, the algorithm stops collecting noise frames!    
+We propose a pseudo-real-time implementation. A "valve activity detector" would be necessary when performing spectral subtraction; the algorithm must stop collecting noise frames when the valve is active!
 
-In a first approximation we will work without a "valve activity detection". Because most of the background noise is somewhat pseudo-stationary while the valve sound is brief, we will collect a long "noise history". This method will not work for other devices: pump, fan. Then we will develop a Valve Activity Detetecion and compare both approaches: with and without VAD.
+Initially, we will approximate without a "valve activity detector" because much of the background noise is somewhat pseudo-stationary, while the valve sound is brief. We will accumulate a long "noise history." This approach might not be effective for other devices like pumps or fans. Subsequently, we will develop a Valve Activity Detector and compare both methods: with and without VAD.
 
-The GSC introduces distortion in the valve sound. We will see if this impacts the classification model acuracy. The added distortion is a redhibitory issue for ASR applications for example.    
+The GSC might introduce distortion into the valve sound. We will assess whether this affects the accuracy of the classification model. Such added distortion could be a significant issue for applications like Automatic Speech Recognition (ASR).
 
-    
-#### Pseudo-real time implementation
+#### Pseudo-Real-Time Implementation:
 
-Frame by frame implementation with overlap-add. We slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply Beamforming and NR Gain in the frequency domain and rebuild the denoised output signals frame by frame after computing an ifft.  
+Frame-by-Frame Processing: We implement this with overlap-add, sliding an NFFT-length window over all 10-second signals with a 66% overlap. We compute the FFT, apply beamforming, and noise reduction gain in the frequency domain, then reconstruct the denoised output signals frame by frame using an IFFT.
 
-Parameters for denoising the recordings:
-- Frames:  Nfft= 512, fs=16000Hz, t= 32 ms.   
-- sliding a NFFT=512 points window frame on the 10 s recordings with a shift of NFFT/3  
-- compute the FFT of each microphone channel.
-- apply the beamforming filters to each microphone channel in the frequency domain
-- sum
-- compute the IFFT
-- rebuild the denoised signal frame by frame. 
+Parameters for Denoising the Recordings:
 
-The procedure is available in the Jupyter Notebook:  <b><i>Part I: Preliminary Activities</i></b>  
+- Frames: NFFT = 512, sampling rate (fs) = 16000 Hz, frame duration (t) = 32 ms.
+- Slide an NFFT=512 point window frame over the 10-second recordings with a shift of NFFT/3.
+- Compute the FFT for each microphone channel.
+- Apply the beamforming filters in the frequency domain to each microphone channel.
+- Sum the results.
+- Compute the IFFT.
+- Reconstruct the denoised signal frame by frame.
 
+This procedure is detailed in the Jupyter Notebook: Part I: Preliminary Activities.
 
 ##  Valve Activity Detection (VAD)
 
