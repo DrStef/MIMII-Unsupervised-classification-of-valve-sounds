@@ -17,29 +17,30 @@ $$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
   
 Industrial machinery often experiences failures or breakdowns, leading to considerable costs for businesses. Consequently, there's growing interest in monitoring these machines with various sensors, such as microphones. <br>
 Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. <br> 
-Hitachi Ltd, has developped the MIMII dataset to the classification sounds of industrial machines operating under both normal and faulty conditions in actual factory settings. With: 
-- subsets of machines: pump, valves, slider, fan
-- subsets of functioning conditions: normal and abnormal
-- background noise
 
-MIMII stands for:  Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br>
-Many unsupervised classification models based on this dataset are available in the literature or on Github. We will provide links and references. 
-<br>
+Hitachi Ltd. has developed the MIMII dataset for classifying sounds from industrial machines operating under both normal and faulty conditions in actual factory environments. This dataset includes:
 
-We develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array.     <br>
-Contrarily to most classification models available in the literature, in this study we somewhat violate the rules of the initial challenge: classification of noisy signals. But since we have access to multiple channels, it makes much sense to <b>denoise</b> the signals before starting the classification process. 
+    Subsets of machines: pumps, valves, sliders, fans.
+    Subsets of operating conditions: normal and abnormal.
+    Background noise.
 
-Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy environment.</b> And then apply the classification model to denoised signales for automatically identifying anomalies, failures, breakdowns.    
-    
-Instead of classifying various machines or types of machines: pump, fan, valve, slider, ...  we will:
 
-- focus on a specific machine type: valve
-- denoise the recordings* using MVDR beamforming and a custom fixed Generalized Sidelobe Canceler (GSC)
-- apply unsupervised classification (auto-encoder, ..) to two sets of signals: single microphone recordings and denoised GSC output, for detecting defective valves and showing the interest of MVDR beamforning + GSC.   
-    
-<i>*Note that in all noisy recordings, the background noise was recorded separately with the 8-microphones array, and added to the devices sounds.  3 cases: SNR= -6 dB, 0 dB, 6 dB. More in the acquisition set-up section </i>  
-    
-  
+MIMII stands for Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br> Many unsupervised classification models based on this dataset can be found in the literature or on GitHub. We will provide links and references accordingly.
+
+We are developing an automatic, unsupervised classification model or an automatic diagnosis model for detecting failures or breakdowns in industrial machinery based on their acoustic characteristics, recorded with an 8-microphone circular array. Unlike most classification models found in literature, this study somewhat deviates from the initial challenge's rules: classification of noisy signals. However, since we have access to multiple channels, it makes practical sense to denoise the signals before initiating the classification process.
+
+Thus, the challenge here is transforming the 8-microphone array into a <b> "sensor" for monitoring industrial machinery sounds in noisy environments</b>. Then, we apply the classification model to these denoised signals to automatically identify anomalies, failures, or breakdowns.
+
+Rather than classifying various types of machines (pumps, fans, valves, sliders), our focus will be:
+
+- Concentrating on a specific machine type: valves.
+- Denoising the recordings using MVDR beamforming combined with a custom, fixed Generalized Sidelobe Canceler (GSC).
+- Applying unsupervised classification techniques (auto-encoder, etc.) to two sets of signals: single microphone recordings and the denoised GSC output, to detect defective valves and demonstrate the benefits of MVDR beamforming combined with GSC.
+
+
+<i>*Note: In all noisy recordings, the background noise was captured separately using the 8-microphone array and then added to the device sounds. This was done under three SNR conditions: -6 dB, 0 dB, and 6 dB. More details can be found in the acquisition setup section.</i>
+
+
 <b> Plan  </b> 
     
 - I   Dataset MIMII
