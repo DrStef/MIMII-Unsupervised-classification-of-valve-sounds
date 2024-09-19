@@ -13,23 +13,22 @@ $$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
 
 <span style="color:#4169E1">  
   
-Factory machinery is prone to failure or breakdown, resulting in significant expenses for companies. Hence, there is a rising in
-terest in machine monitoring using different sensors including microphones. In the scientific community, the emergence of public datasets has led to advancements in acoustic detection and classification of scenes and events, but there are no public datasets that focus on the sound of industrial machines under normal and anomalous operating conditions in real factory environments. 
-    
-We develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array. 
-       
-The model is based on the MIMII dataset by Hitachi, Ltd described in the next section.    
-Many unsupervised classification models based on this dataset are available in the literature or on Github. We will provide the links and references. 
-    
- In this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to denoise the signals before starting the classification process. 
+Industrial machinery often experiences failures or breakdowns, leading to considerable costs for businesses. Consequently, there's growing interest in monitoring these machines with various sensors, such as microphones. <br>
+Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. Hitachi Ltd, has developped the MIMII dataset to the classification sounds of industrial machines operating under both normal and faulty conditions in actual factory settings.
+MIMII stands for:  Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. 
 
- Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy environment.</b> And identifying anomalies, failures, breakdowns.    
+Many unsupervised classification models based on the same dataset are available in the literature or on Github. We will provide the links and references. 
+
+Based on this dataset, we develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array.     <br>
+In this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to denoise the signals before starting the classification process. 
+
+Therefore, here the challenge is more about turning the 8-microphones array into a <b> "sensor" for monitoring industrial machinery sounds in a noisy environment.</b> And then develop the classification model for automotically identifying anomalies, failures, breakdowns.    
     
 Instead of classifying various machines or types of machines: pump, fan, valve, slider, ...  we will:
 
 - focus on a specific machine type: valve
 - denoise the recordings* using MVDR beamforming and a custom fixed Generalized Sidelobe Canceler (GSC)
-- apply unsupervised classification: auto-encoder to two sets: single microphone recordings and denoised GSC output.   
+- apply unsupervised classification: auto-encoder to two sets: single microphone recordings and denoised GSC output for detecting abnormal .   
     
 <i>*Note that in all noisy recordings, the background noise was recorded separately with the 8-microphones array, and added to the devices sounds.  3 cases: SNR= -6 dB, 0 dB, 6 dB. </i>  
     
