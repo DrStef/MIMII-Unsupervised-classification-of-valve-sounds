@@ -136,18 +136,18 @@ with the ability to steer a beam in the direction of interest: the sound source 
 
 Can a beamformer get rid of ambient noise artifically added to the sound of interest ? 
 
-Backround noise added to sound sources of interest in the MIMII dataset was recorded with the 8 microphones array and then all channels were mixed under 3 conditions: 
+Backround noise added to sound sources of interest in the MIMII dataset was recorded with the same TAMAGO 8 microphones array and then all channels were mixed under 3 conditions: 
 
 - SNR= 6 dB
 - SNR= 0 dB
 - SNR= -6 dB  (worst case scenario)
 
-We will denoise signals in the SNR= -6 dB scenario.   
+We will denoise and classify signals in the SNR= -6 dB scenario (the worst case scenario).   
 
 - Assuming that microphone 1 is in the direction of the sound source of interest (here the valve), and that some background noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
 - if some isotropic ambient noise was recorded with the array, in this case the beamformer will be efficient
 
-Fortunately in most recordigs we listened to in the -6dB_Valve dataset, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assumed the array in free field.  
+Fortunately in most recordigs we listened to in the -6dB_Valve dataset, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assume that the array is in free field.  
 
 ##  Multi-Microphone diagnosis sensor.
 
@@ -204,7 +204,7 @@ Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
 
 Computing optimal MVDR beamforming filters   
     
-The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.   
+The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.  Once the simulation is ready we will build a new MIMII denoised valve dataset.  
     
 We compute two sets of filters:  
 - Main beam: optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$ in the block diagram in the next section. 
@@ -216,15 +216,17 @@ The computation of the filters is left as an exercise. Some experimentation will
 
 #### Generalized Side Lobe Canceller 
 
-We will use a fixed beamforming approach. The fixed GSC strategy is equivalent to a multi-channel Wiener gain. But instead of implementing a spctrum difference, we can replace it with more advanced gains. 
+We will use a fixed beamforming approach. The fixed GSC strategy is equivalent to a multi-channel Wiener gain. But instead of implementing a spectral difference, we can replace it with more advanced NR gains and evaluation of a priori_SNR. 
 
 Denoising is performed in two stages:
 
-- beamforming alone 
-- Generalized Sidelobe Canceller with 2 channels 
+- stage I: MVDR beamforming alone 
+- stage II: Generalized Sidelobe Canceller with 2 channels 
 
+The structure of a real GSC is presented in the following article: 
 https://www.researchgate.net/figure/General-structure-of-the-generalized-sidelobe-canceller-GSC-with-Y-k-b-being-the_fig2_224208512
-    
+
+We extract the bloc diagram. 
     
 | <p align="center"> <img src="GSC_blockdiagram.png" width="600"  /> </p> |  
 | ---       |   
@@ -241,7 +243,7 @@ The GSC introduces distortion in the valve sound. We will see if this impacts th
     
 Pseudo-real time implementation
 
-Overlap-add, we will slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply NR Gain in the frequency domain and build the denoised output signals after computing an ifft.  
+Frame by frame implmentation with overlap-add. We slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply Beamforming and NR Gain in the frequency domain and rebuild the denoised output signals frame by frame after computing an ifft.  
 
 Parameters for denoising the recordings:
 - Frames:  Nfft= 512, fs=16000Hz, t= 32 ms.   
