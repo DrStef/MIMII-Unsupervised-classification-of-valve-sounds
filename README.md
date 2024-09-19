@@ -277,7 +277,7 @@ Ideally, we should have access to valve sounds without any noise. We built label
 - Valve sound frames: collected from the 6 dB SNR dataset, specifically Normal, id00, id02, id04, id06. Ideally, we would have access to valve sounds against a silent background, but such data is not available. We had access only to "noisy" valve sound frames, which is why we selected the best SNR data available.
 - Background noise frames: collected from the -6 dB SNR dataset, Normal, id00, id02, id04, id06, when valves are inactive.
 
-In this notebook, we will explore:
+In this study, we will explore:
 
 - Low-complexity VAD models based on Machine Learning. These models will be utilized in our two-stage Noise Reduction algorithm.
 - High-complexity models leveraging advanced features:  Short-Time Fourier Transforms (STFT), mel-spectrograms, or wavelet transforms and Deep Learning, specifically a Convolutional Neural Network (CNN).
@@ -305,6 +305,10 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 
 
 
+##   Notebooks
+
+
+<b><i>Part I: Preliminary Activities</i></b>    (includes the General Introduction)
 
 
 
