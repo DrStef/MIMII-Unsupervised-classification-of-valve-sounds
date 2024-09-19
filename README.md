@@ -20,9 +20,9 @@ Within the scientific community, the availability of public datasets has enhance
 
 Hitachi Ltd. has developed the MIMII dataset for classifying sounds from industrial machines operating under both normal and faulty conditions in actual factory environments. This dataset includes:
 
-    Subsets of machines: pumps, valves, sliders, fans.
-    Subsets of operating conditions: normal and abnormal.
-    Background noise.
+- Subsets of machines: pumps, valves, sliders, fans.
+- Subsets of operating conditions: normal and abnormal.
+- Background noise.
 
 
 MIMII stands for Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br> Many unsupervised classification models based on this dataset can be found in the literature or on GitHub. We will provide links and references accordingly.
