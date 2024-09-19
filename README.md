@@ -286,9 +286,7 @@ The low-complexity models are the priority for proceeding with Noise Reduction. 
 ##  Early Results Beamforming
 
 
-
-https://github.com/user-attachments/assets/7bdc93e2-a7e2-4cac-8e77-e5c78ee05a9c
-
+https://github.com/user-attachments/assets/03c98bcb-2b2b-4ff4-864a-7c9310baee98
 
 
 
