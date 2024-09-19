@@ -116,13 +116,6 @@ We will work with the Valve dataset only, therefore with a beamformer steered at
     
 https://www.sifi.co.jp/en/product/microphone-array/
     
-Index Terms  
-Machine sound dataset, Acoustic scene classification, Anomaly detection, Unsupervised anomalous sound detection  
-    
-- SNR= 6 dB
-- SNR= 0 dB
-- SNR= -6 dB
-
 
 ##  Denoising ? 
 
@@ -130,8 +123,7 @@ Machine sound dataset, Acoustic scene classification, Anomaly detection, Unsuper
 
 <span style="color:#4169E1">  
     
-
-In many results with the DCASE2020, DCASE2022 challenge datasets, that include single channels of the MIMII dataset, noise and reverberation are often reported as a contributing factor for poor classification accuracy.  
+In many results in the DCASE2020, DCASE2022 challenge, that include single channels of the MIMII dataset, noise and reverberation are often reported as a contributing factor for poor classification accuracy.  
 <br>
 If we were to design a system for acquiring industrial sounds, a microphone array is an ideal tool to:
 
@@ -140,31 +132,33 @@ If we were to design a system for acquiring industrial sounds, a microphone arra
 
 with the ability to steer a beam in the direction of interest: the sound source to be monitored.   
 
-
 Can a beamformer get rid of ambient noise artifically added to the sound of interest ? 
     
-- Assuming mic 1 is in the direction of the source, and that some noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
+- Assuming that microphone 1 is in the direction of the sound source of interest (the valve), and that some background noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
 - if some isotropic ambient noise was recorded, in this case the beamformer will be efficient
 
-Fortunately is most recordigs we listened to, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should attanuate the ambient noise. At least at low frequencies under 1000 Hz since w assume the array in free field.  
+Fortunately in most recordigs we listened to, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assumed the array in free field.  
 
 ##  Multi-Microphone diagnosis sensor.
 
 <br>
 <span style="color:#4169E1">  
-    
-    
+  
 If we were to design a sensor for monitoring industrial machinery sounds, in a noisy envionement, then a multi-microphone sesnor i.e. a microphone array, makes absolute sense. <br>
-Here we are going to turn the TAMAGO microphone array in a diagnosis sensor. With proper beamforming filters and noise reduction strategy. 
+Here we are going to turn the TAMAGO microphone array into a diagnosis sensor. With proper beamforming filters and noise reduction strategy. 
 <br>    
     
     
 ####  Beamforming
     
-Beamforming is a noise reduction technique based on <b><i>spatial filtering</i></b>. Basically the multiple microphones capture acoustic waves  and thei output is combined to increase the gain in a specific direction. 
+Beamforming is a noise reduction technique based on <b><i>spatial filtering</i></b>. Basically the multiple microphones capture acoustic waves and their outputs are combined to increase the gain in a specific direction. 
 Beamforming can be combined with classic Noise Reduction techniques as we will see in the next section.       
     
-The 68 mm diameter microphone array is small and the number of microphones: 8 is an overkill, and it will oversample acoustic waves at low frequency. When implementing MVDR beamforming we will introduce significant regularization which will limit the Directivity Index. <b> After multiple experimentation, strong regularization was needed... even minor microphone mismatch in magnitude and phase, can significantly degrade the performance of the beamformer. </b>
+The 68 mm diameter microphone array is small and the number of microphones: 8 is an overkill, and it will oversample acoustic waves at low frequency and creates the follwing issues: 
+- with too many microphones, optimal MVDR beamfoming filters gain can be very high for achieving maximum directivity. Typically +50, +60dB which would degrade so much the WNG(White Noise Gain) taht it makes their implementation impossible.
+- minor microphones mismatch in magnitude and phase, can further significantly degrade the performance of the beamformer.
+
+Therefore, when implementing the MVDR beamforming with the TAMAGO micropone array, we will introduce significant regularization at low frequency, which will degrade the Directivity Index at low frequency. 
 
 <i>R=0.068/2</i>  % Radius of the circular array in meter (m) <br>
 % Circular array geometry <br>
