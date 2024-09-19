@@ -297,7 +297,7 @@ For designing the valve activity detector we will: <br>
 - compute STFT, mel-spectrograms or wavelets transforms.
 - build a Deep Learning model.  CNN.   
 
-###   References 
+##   References 
 
 <br>
 <span style="color:#4169E1">  
