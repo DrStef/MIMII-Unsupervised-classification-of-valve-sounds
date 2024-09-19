@@ -14,11 +14,13 @@ $$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
 <span style="color:#4169E1">  
   
 Industrial machinery often experiences failures or breakdowns, leading to considerable costs for businesses. Consequently, there's growing interest in monitoring these machines with various sensors, such as microphones. <br>
-Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. Hitachi Ltd, has developped the MIMII dataset to the classification sounds of industrial machines operating under both normal and faulty conditions in actual factory settings.
-MIMII stands for:  Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. 
-
-Many unsupervised classification models based on the same dataset are available in the literature or on Github. We will provide the links and references. 
-
+Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. <br> 
+Hitachi Ltd, has developped the MIMII dataset to the classification sounds of industrial machines operating under both normal and faulty conditions in actual factory settings. With: 
+- subsets of machines: pump, valves, slider, fan
+- subsets of functioning conditions: normal and abnormal. <br>
+MIMII stands for:  Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br>
+Many unsupervised classification models based on this dataset are available in the literature or on Github. We will provide links and references. 
+<br>
 Based on this dataset, we develop an automatic unsupervised classification model or automatic diagnosis model for detecting failures or breakdowns of industrial machinery based on their acoustics characteristics, recorded with a 8-microphones circular array.     <br>
 In this study we somewhat violate the rules of the initial challenge: classification in noisy environment. But since we have access to multiple channels, it makes much sense to denoise the signals before starting the classification process. 
 
