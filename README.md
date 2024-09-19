@@ -11,6 +11,8 @@ $$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
 
 ## General Introduction
 
+This READ.me is under construction. (Sept 17th, 2024)
+
 <span style="color:#4169E1">  
   
 Industrial machinery often experiences failures or breakdowns, leading to considerable costs for businesses. Consequently, there's growing interest in monitoring these machines with various sensors, such as microphones. <br>
@@ -123,7 +125,7 @@ https://www.sifi.co.jp/en/product/microphone-array/
 
 <span style="color:#4169E1">  
     
-In many results in the DCASE2020, DCASE2022 challenge, that include single channels of the MIMII dataset, noise and reverberation are often reported as a contributing factor for poor classification accuracy.  
+In many models and results developped in the DCASE2020, DCASE2022 challenges, that include single channels of the MIMII dataset, noise and reverberation are often reported as a contributing factor for poor classification accuracy.  
 <br>
 If we were to design a system for acquiring industrial sounds, a microphone array is an ideal tool to:
 
@@ -133,11 +135,19 @@ If we were to design a system for acquiring industrial sounds, a microphone arra
 with the ability to steer a beam in the direction of interest: the sound source to be monitored.   
 
 Can a beamformer get rid of ambient noise artifically added to the sound of interest ? 
-    
-- Assuming that microphone 1 is in the direction of the sound source of interest (the valve), and that some background noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
-- if some isotropic ambient noise was recorded, in this case the beamformer will be efficient
 
-Fortunately in most recordigs we listened to, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assumed the array in free field.  
+Backround noise added to sound sources of interest in the MIMII dataset was recorded with the 8 microphones array and then all channels were mixed under 3 conditions: 
+
+- SNR= 6 dB
+- SNR= 0 dB
+- SNR= -6 dB  (worst case scenario)
+
+We will denoise signals in the SNR= -6 dB scenario.   
+
+- Assuming that microphone 1 is in the direction of the sound source of interest (here the valve), and that some background noise source was recorded in the direction of microphone number 1, it will be difficult to denoise the recordings.  
+- if some isotropic ambient noise was recorded with the array, in this case the beamformer will be efficient
+
+Fortunately in most recordigs we listened to in the -6dB_Valve dataset, the ambient noise seems to be rather isotropic or at least the main noise source is not at 000 deg. Therefore the MVDR beamformer should efficiently attenuate the ambient noise. At least at low frequencies under 1000-1500 Hz since we assumed the array in free field.  
 
 ##  Multi-Microphone diagnosis sensor.
 
@@ -194,28 +204,19 @@ Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
 
 Computing optimal MVDR beamforming filters   
     
-The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be devlopped in PART II.  Beamforming.      
+The 8-microphones array is embedded in a rigid egg shape. It cannot be treated as free field array, except at low frequency when the acoustic wavelength is very large compared with the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and we will use analytical or semi-analytical models for characterezing the acoustics field diffracted by the "egg".  This will be developped in PART II.   
     
-Main beam: 
-  
+We compute two sets of filters:  
+- Main beam: optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$ in the block diagram in the next section. 
+- "Noise channel": filters of a non adaptive generalized side lobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. Filters $W^H_{v}B$ in the block diagram. 
 
-Noise channel
-
-The Noise channel is intended to implement a non-adaptive Generalized Sidelobe Canceller or Multi-channel Wiener.  
-
-The code for generating the 2 sets of filters is confidential. Especially the "noise channel" filters, since it is a custom implementation that alleviates ill-conditonned noise coherence matrix at low frequency, when the acoustic wavelenth is very large compared with the size of the array. And it is the case here with a small 60mm diameter array.    
-
+The code for generating the 2 sets of filters is confidential. 
 Theoretical aspects for computing the filters are presented in Ward [], chapter II: <i> "Superdirective Microphone Arrays" </i>. 
-We compute:     
-- optimal MVDR beamforming filters, for the main beam and main channel. Where we assume an isotropic noise field. Filters $W^H_f$  on the block diagram. 
-- filters of a non adaptive generalized side lobe canceller (GSC) or multi-channel Wiener for the secondary, "orthogonal" channel. Filters $W^H_{v}B$ on the block diagram. 
-   
 The computation of the filters is left as an exercise. Some experimentation will be needed for regularizing the various ill-conditionned matrices. 
 
 #### Generalized Side Lobe Canceller 
 
-We will use a fixed beamforming approch. Where the GSC has a frozen filters and enhances 
-The fixed GSC strategy is equivalent to a multi-channel Wiener gain. 
+We will use a fixed beamforming approach. The fixed GSC strategy is equivalent to a multi-channel Wiener gain. But instead of implementing a spctrum difference, we can replace it with more advanced gains. 
 
 Denoising is performed in two stages:
 
@@ -233,15 +234,17 @@ https://www.researchgate.net/figure/General-structure-of-the-generalized-sidelob
 We propose a pseudo-real time implementation.     
 A "valve activity detector" would be needed when performing the spectral subtraction: when the valve is active, the algorithm stops collecting noise frames!    
 
-In a first approximation we will work without a "valve activity detection". Because the background noise is somewhat pesudo-stationary while the valve sound is brief, we will collect a long "noise history" that will     . This method will not work for other devices: pump, fan. 
+In a first approximation we will work without a "valve activity detection". Because most of the background noise is somewhat pseudo-stationary while the valve sound is brief, we will collect a long "noise history". This method will not work for other devices: pump, fan. Then we will develop a Valve Activity Detetecion and compare both approaches: with and without VAD.
 
-The GSC introduces distortion in the valve sound. This may not be a problem if we train the model with distorted valve sounds.  But it would be a redhibitory issue for ASR applications for example.    
+The GSC introduces distortion in the valve sound. We will see if this impacts the classification model acuracy. The added distortion is a redhibitory issue for ASR applications for example.    
 
     
-    
-Pseudo code: 
-For denoising the recordings:
-- Nfft= 512, fs=16000Hz, t= 32 ms.  
+Pseudo-real time implementation
+
+Overlap-add, we will slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply NR Gain in the frequency domain and build the denoised output signals after computing an ifft.  
+
+Parameters for denoising the recordings:
+- Frames:  Nfft= 512, fs=16000Hz, t= 32 ms.   
 - sliding a NFFT=512 points window frame on the 10 s recordings with a shift of NFFT/3  
 - compute the FFT of each microphone channel.
 - apply the beamforming filters to each microphone channel in the frequency domain
@@ -249,7 +252,7 @@ For denoising the recordings:
 - compute the IFFT
 - rebuild the denoised signal frame by frame. 
 
-The procedure is in the attached Octave/Matlab script. It will be turned into a Python code.  
+The procedure is available in the Jupyter Notebook:  <b><i>Part I: Preliminary Activities</i></b>  
 
 
 ##  Valve Activity Detection (VAD)
