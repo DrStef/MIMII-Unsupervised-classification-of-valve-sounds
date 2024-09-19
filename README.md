@@ -232,10 +232,10 @@ Denoising is performed in two stages:
 - stage I: MVDR beamforming alone 
 - stage II: Generalized Sidelobe Canceller with 2 channels 
 
-The structure of a real GSC is presented in the following article: 
+The structure of a real GSC is presented in the following article: <br>
 https://www.researchgate.net/figure/General-structure-of-the-generalized-sidelobe-canceller-GSC-with-Y-k-b-being-the_fig2_224208512
 
-We extract the bloc diagram. 
+We extract the block diagram. 
     
 | <p align="center"> <img src="GSC_blockdiagram.png" width="600"  /> </p> |  
 | ---       |   
@@ -250,9 +250,9 @@ In a first approximation we will work without a "valve activity detection". Beca
 The GSC introduces distortion in the valve sound. We will see if this impacts the classification model acuracy. The added distortion is a redhibitory issue for ASR applications for example.    
 
     
-Pseudo-real time implementation
+#### Pseudo-real time implementation
 
-Frame by frame implmentation with overlap-add. We slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply Beamforming and NR Gain in the frequency domain and rebuild the denoised output signals frame by frame after computing an ifft.  
+Frame by frame implementation with overlap-add. We slide a nfft long window on all 10 second signals, with a 66% overlap, compute the fft, apply Beamforming and NR Gain in the frequency domain and rebuild the denoised output signals frame by frame after computing an ifft.  
 
 Parameters for denoising the recordings:
 - Frames:  Nfft= 512, fs=16000Hz, t= 32 ms.   
@@ -276,7 +276,8 @@ Therefore we design a VAD. Not voice activity detection but "Valve Activity Dete
     
 We created two datasets of 512 points mono sound frames, 32 ms, sampled at fs= 16kHz. 
     
-- Valve sound frames: collected in the <b>6dB SNR</b> dataset, Normal, id00, id02, id04, id06. Ideally we would like to have access to valve sounds in silent background, but this data is not available. We had access to "noisy" valve sound frames only, the reason why we selected the best SNR data available.     
+- Valve sound frames: collected in the <b>6dB SNR</b> dataset, Normal, id00, id02, id04, id06. <br>
+  Ideally we would like to have access to valve sounds in silent background, but this data is not available. We had access to "noisy" valve sound frames only, the reason why we selected the best SNR data available.     
 - Background noise frames: collected in the <b>-6dB SNR</b> dataset, Normal, id00, id02, id04, id06 when valves are not active. 
     
 In this notebook we will investigate: 
@@ -285,10 +286,8 @@ In this notebook we will investigate:
 - high complexity models based on advanced features and Deep Learning.  
     
 The low complexity models are the priority for proceeding with Noise Reduction. <br> 
-The Notebook will be updated on a regular basis with more advanced models. 
-    
-    
-    
+Notebooks will be updated on a regular basis with more advanced models. 
+  
     
 <span style="color:#4169E1">  
 
