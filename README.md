@@ -11,7 +11,7 @@ $$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
 
 ## General Introduction
 
-This READ.me is under construction. (Sept 17th, 2024)
+<b>This document is under construction.</b> (Sept 17th, 2024)
 
 <span style="color:#4169E1">  
   
