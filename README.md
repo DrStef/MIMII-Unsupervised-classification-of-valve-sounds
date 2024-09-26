@@ -204,7 +204,7 @@ Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
     
 ###  Beampatterns
 
-We can plot the beampatterns in the horizintal plane v. frequency : 
+We can plot the beampatterns in the horizontal plane v. frequency : 
     
 | <p align="center"> <img src="Directivity_HorizontalPlan.png" width="350"  /> </p> |  
 |       ---       |       
