@@ -305,32 +305,18 @@ The original .wav files were converted to .mp4 format using VLC media player for
 
 Further Information:  <br>
 
-    A detailed analysis of these techniques and results will be available in a forthcoming Jupyter Notebook.
+A detailed analysis of these techniques and results will be available in a forthcoming Jupyter Notebook.
 
 
-
-
-We selected the 8-channels recording: id00_n_00000117   <br> 
-We applied:
-- pure MVDR beamforming assuming an array in free field
-- and then a GSC strategy with a Valve Activity Detection. 
-
-In order to play the various recordings on Github, .wav files were converted to MP4 using VLC media player. <br> 
-From the recordings below we can appreciate: 
-- backgroud noise attenuation at low frequency with the MVDR beamforming (a noise degradation occurs at high frequency due to the free field assumption).
-- further noise reduction with the GSC strategy, with some valve sound distortion.
-
-More details will be provided in a dedicated Jupyter Notebook. 
-
-Microphone n. 1 :
+<b><i>Microphone n. 1:</i></b>
 
 https://github.com/user-attachments/assets/843f1dee-9837-4e55-85d5-2264ed983476
 
-Beamformer output :
+<b><i>MVDR Beamformer output:</i></b>
 
 https://github.com/user-attachments/assets/ecfa8963-bb75-4864-99d7-4e31257d3b4a
 
-GSC output with VAD :  
+<b><i>GSC output with Valve Activity Detection: </i></b> 
 
 https://github.com/user-attachments/assets/c4e86685-4dbe-4a32-aa33-dfcb5771128d
 
