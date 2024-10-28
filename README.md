@@ -285,12 +285,17 @@ The low-complexity models are the priority for proceeding with Noise Reduction. 
 ##  Early Results Beamforming
 
 
-We selected the 8-channels recordings : id00_n_00000117 
-We applied pure MVDR beamforming and then a GSC strategy with a Valve Activity Detection. 
+We selected the 8-channels recording: id00_n_00000117   <br> 
+We applied:
+- pure MVDR beamforming assuming an array in free field
+- and then a GSC strategy with a Valve Activity Detection. 
 
-In order to play the various sonds, .wav files were converted to MP4 using VLC media player. 
-From the recordings below we can appreciate the effect of MVDR beamforming and GSC to reduce background noise. 
-More details will be provided in dedicated Notebooks. 
+In order to play the various recordings on Github, .wav files were converted to MP4 using VLC media player. <br> 
+From the recordings below we can appreciate: 
+- backgroud noise attenuation at low frequency with the MVDR beamforming (a noise degradation occurs at high frequency due to the free field assumption).
+- further noise reduction with the GSC strategy, with some valve sound distortion.
+
+More details will be provided in a dedicated Jupyter Notebook. 
 
 Microphone n. 1 :
 
