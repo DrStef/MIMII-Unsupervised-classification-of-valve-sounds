@@ -284,6 +284,31 @@ The low-complexity models are the priority for proceeding with Noise Reduction. 
 
 ##  Early Results Beamforming
 
+We selected an 8-channel recording for processing: id00_n_00000117.
+
+<b>Processing Applied:</b>
+
+- MVDR beamforming was implemented, assuming the microphone array operates in a free field.
+- Subsequently, a Generalized Sidelobe Canceller (GSC) strategy was employed, incorporating Valve Activity Detection.
+
+
+<b>Conversion for GitHub Playback:</b>
+
+The original .wav files were converted to .mp4 format using VLC media player for easier playback on GitHub.
+
+
+<b>Observation from Processed Recordings:</b>
+
+- MVDR Beamforming: This method showcases effective background noise attenuation at lower frequencies. However, there's a noticeable degradation in noise reduction at higher frequencies, likely due to the free-field assumption.
+- GSC Strategy: Offers additional noise reduction beyond MVDR, though it introduces some distortion in valve sounds.
+
+
+Further Information:  <br>
+
+    A detailed analysis of these techniques and results will be available in a forthcoming Jupyter Notebook.
+
+
+
 
 We selected the 8-channels recording: id00_n_00000117   <br> 
 We applied:
