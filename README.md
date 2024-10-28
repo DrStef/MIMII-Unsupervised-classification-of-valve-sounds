@@ -285,6 +285,23 @@ The low-complexity models are the priority for proceeding with Noise Reduction. 
 ##  Early Results Beamforming
 
 
+We selected the 8-channels recordings : id00_n_00000117 
+We applied pure MVDR beamforming and then a GSC strategy with a Valve Activity Detection. 
+
+In order to play the various sonds, .wav files were converted to MP4 using VLC media player. 
+From the recordings below we can appreciate the effect of MVDR beamforming and GSC to reduce background noise. 
+More details will be provided in dedicated Notebooks. 
+
+Microphone n. 1 :
+
+https://github.com/user-attachments/assets/843f1dee-9837-4e55-85d5-2264ed983476
+
+Beamformer output :
+
+https://github.com/user-attachments/assets/ecfa8963-bb75-4864-99d7-4e31257d3b4a
+
+GSC output with VAD :  
+
 https://github.com/user-attachments/assets/c4e86685-4dbe-4a32-aa33-dfcb5771128d
 
 
