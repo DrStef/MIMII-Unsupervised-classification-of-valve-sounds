@@ -94,7 +94,7 @@ https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detectio
     
 #### Microphone Array     
     
-The MIMII dataset was recorded with the follwing 8-microphones array:  <br> 
+The MIMII dataset was recorded with the following 8-microphones array:  <br> 
 
 | <p align="center"> <img src="MIMII_Microphone_array.png" width="300"  /> </p> |  <p align="center"> <img src="https://github.com/DrStef/MIMII/blob/main/Tamago_egg.png" width="200"  /> </p> |   
 | ---       |   ---  |   
