@@ -1,17 +1,97 @@
-# MIMII Dataset
-$$\small{\textbf{Digital Signal Processing and Deep Learning/Machine learning }}$$
+# MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder
 
-$$\large{\textbf{Unsupervised classification: }}$$ 
+$$\large{\textbf{Digital Signal Processing, Deep Learning, and Machine Learning for Unsupervised Anomaly Detection}} $$   
 
-$$\large{\textbf{Malfunctioning Industrial Machine Investigation and Inspection}}$$ 
+$$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection (MIMII)}}$$
 
-$$\small{\textbf{Dr. Stéphane DEDIEU, Spring - Summer 2024 }}$$
+
+$$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
+
+
+This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary aT-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [Bloo Audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
+
+## Project Overview
+We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
+
+- **Part I: Noise Reduction** – Denoise –6 dB valve audio using 8-mic beamforming and Ephraim-Malah filtering to isolate valve sounds in noisy factories.
+- **Part II: Autoencoder Classification** – Train a CNN-based autoencoder on normal valve sounds (6 dB SNR) to flag anomalies via reconstruction errors.
+- **Part III: Comparative Analysis** – Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
+
+### Key Features
+- **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR).
+- **aT-STFT Features**: Proprietary transform (256x256x2 spectrograms, hop_length=91, n_fft=512) detects >4 kHz anomalies, outperforming STFT by ~25% (AUC: 0.992–0.998 vs. 0.7416 for id_04).
+- **CNN Autoencoder**: Unsupervised model (latent_dim=128, dropout=0.5, L2=0.002) trained on normal frames, achieving AUC > 0.8 (ongoing, June 3, 2025).
+- **Frame Alignment**: Identical 1.5s frames extracted across 6 dB and –6 dB (raw/denoised) datasets using saved indices for consistency.
+- **Scalability**: Pipeline adapts to other machines (e.g., TRANE compressors) for predictive maintenance.
+
+### Dataset
+- **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
+- **6_dB_valve**:
+  - Normal: 3691 1.5s frames (id_00: 991, id_02: 708, id_04: 1000, id_06: 992).
+  - Abnormal: 479 frames (id_00: 119, others: 120).
+  - Source: 10s WAVs split via Hilbert envelope filtering (threshold_factor=1.5).
+- **–6_dB_valve**: Noisy data, to be denoised and aligned with 6_dB_valve frames (planned, June 3, 2025).
+- **Preprocessing**: aT-STFT spectrograms (256x256x2, magnitude + phase, scaled [0, 1]) from 1.5s frames.
+
+### Pipeline Details
+#### Part I: Noise Reduction
+- **Objective**: Denoise –6 dB valve audio to create `denoised_id##` dataset, enhancing valve signals for anomaly detection.
+- **Methods**:
+  - **Beamforming**: MVDR or delay-and-sum using 8-mic TAMAGO-03 array, modeled as a prolate spheroid for diffraction (Part II simulation planned).
+  - **Ephraim-Malah Filtering**: Spectral subtraction to remove residual noise.
+  - **VAD**: Excludes artifacts (e.g., “coin coin” noise).
+- **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
+- **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
+
+#### Part II: CNN-Based Autoencoder
+- **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
+- **Model**:
+  - Architecture: CNN (32→64→128 filters, Conv2D/Transpose, latent_dim=128).
+  - Regularization: Dropout=0.5, spatial dropout=0.3, L2=0.002.
+  - Optimizer: Adam with ReduceLROnPlateau (factor=0.5, patience=3, min_lr=1e-6).
+  - Loss: MSE, batch_size=64, epochs=30, early stopping (patience=10).
+- **Training**:
+  - Data: `ids_X_train` (3691 normal, 256x256x2), `ids_X_test` (958: 479 normal + 479 abnormal, seed=25).
+  - Initial Run (Stopped, Epoch 10): Overfitting (loss=0.0467, val_loss=0.0848, gap=0.0381, spike to 0.1111).
+  - Retraining (June 3, 2025, Ongoing): Improved at Epoch 8 (loss=0.0500, val_loss=0.0529, gap=0.0029, lr=0.0010).
+  - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.8 (vs. id_04’s 0.992–0.998).
+- **Results**: Awaiting Epoch 10+ metrics (AUC, confusion matrix, FN spectrograms for >4 kHz patterns).
+- **Visualizations**: ROC curve, confusion matrix, training history, error histogram, FN spectrograms (results/plots/unified).
+
+#### Part III: Comparative Analysis
+- **Objective**: Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
+- **Frame Alignment Strategy**:
+  - Extract 1.5s frames from 6_dB_valve 10s WAVs (Hilbert envelope, hop=100 ms), saving indices (valve_id, file_name, label, frame_number, start_time) to `results/6dB_frame_indices.csv`.
+  - Use indices to extract identical frames from –6 dB_valve (raw: `-6_dB_valve/valve_1p5s`, denoised: `-6_dB_valve/denoised_1p5s`).
+  - Status: Planned for IA laptop, June 3, 2025.
+- **Analysis**: Train/test autoencoders on raw/denoised –6 dB data, report AUCs, and compare to 6_dB_valve.
+
+### Results
+- **id_04 (Single Valve, 1.5s, Seed=25)**: AUC=0.992 (vs. 0.998 seed=42), val_loss ~0.0501, gap ~0.0044.
+- **Unified Model (All Valves, Retraining)**:
+  - Epoch 8 (June 3, 2025): loss=0.0500, val_loss=0.0529, gap=0.0029.
+  - Awaiting final AUC, confusion matrix (TN, FP, FN, TP), F1-score.
+- **id_02 Note**: Monitoring 708 normal frames (vs. ~1000 others); augmentation (time-shifting, noise_factor=0.05) planned if AUC < 0.8.
+- **Plots**: ROC, confusion matrix, FN spectrograms (results/plots/unified) for Part II and TRANE pitch.
+
+### Future Work
+- **–6 dB Denoising**: Implement 8-mic pipeline (beamforming, Ephraim-Malah) for Part I, extract aligned frames for Part III.
+- **TRANE Application**: Adapt pipeline for compressor monitoring (8-mic arrays, vibration sensors), as pitched to TRANE Canada (PowerPoint in development).
+- **ClearFormer Exploration**: Future project on Google’s ClearFormer for ASR noise reduction (time-frequency masks), separate from MIMII.
+- **LinkedIn Showcase**: Post updated AUCs, plots, and PowerPoint schematic (inspired by ResearchGate, 2022) on [Your Company LinkedIn].
+
+### Installation
+```bash
+pip install -r requirements.txt
+```
+
+
 
 
 
 ## General Introduction
 
-<b>This document is under construction.</b> (Sept 17th, 2024)
+<b>This document is under construction.</b> (Sept 17th, 2024- Update June 2025)
 
 <span style="color:#4169E1">  
   
