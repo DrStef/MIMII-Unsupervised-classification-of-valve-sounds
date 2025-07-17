@@ -1,6 +1,6 @@
 
 
-$$\large{\textbf{Digital Signal Processing, Deep Learning, and Machine Learning for Unsupervised Anomaly Detection}} $$   
+$$\small{\textbf{Digital Signal Processing, Deep Learning, and Machine Learning for Unsupervised Anomaly Detection}} $$   
 $$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection (MIMII)}}$$
 $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
