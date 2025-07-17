@@ -1,49 +1,43 @@
-# MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder
+
 
 $$\large{\textbf{Digital Signal Processing, Deep Learning, and Machine Learning for Unsupervised Anomaly Detection}} $$   
-
 $$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection (MIMII)}}$$
-
-
 $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
+
+
+<h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
 
 This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary aT-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [Bloo Audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
 
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
 
-- **Part I: Noise Reduction** – Denoise –6 dB valve audio using 8-mic beamforming and Ephraim-Malah filtering to isolate valve sounds in noisy factories.
-- **Part II: Autoencoder Classification** – Train a CNN-based autoencoder on normal valve sounds (6 dB SNR) to flag anomalies via reconstruction errors.
+- **Part I: Autoencoder Classification** – Train a CNN-based autoencoder on normal valve sounds (6 dB SNR) to flag anomalies via reconstruction errors.
+- **Part II: Noise Reduction** – Develop 8-mic beamforming and Ephraim-Malah filtering to isolate valve sounds in noisy factories.
 - **Part III: Comparative Analysis** – Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
 
 ### Key Features
-- **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR).
-- **aT-STFT Features**: Proprietary transform (256x256x2 spectrograms, hop_length=91, n_fft=512) detects >4 kHz anomalies, outperforming STFT by ~25% (AUC: 0.992–0.998 vs. 0.7416 for id_04).
+
+- **AC-STFT Features**: Proprietary complex transform (256x256x2 spectrograms magnitude+phase, hop_length=91, n_fft=512) detects anomalies, outperforming STFT by ~25% (AUC: 0.992–0.998 vs. 0.7416 for id_04).
 - **CNN Autoencoder**: Unsupervised model (latent_dim=128, dropout=0.5, L2=0.002) trained on normal frames, achieving AUC > 0.8 (ongoing, June 3, 2025).
 - **Frame Alignment**: Identical 1.5s frames extracted across 6 dB and –6 dB (raw/denoised) datasets using saved indices for consistency.
-- **Scalability**: Pipeline adapts to other machines (e.g., TRANE compressors) for predictive maintenance.
-
+- **Scalability**: Pipeline adapts to other machines (compressor, sliders...) for predictive maintenance.
+- **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR).
+- 
 ### Dataset
 - **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
 - **6_dB_valve**:
+10 seconds recordings (WAV files), fs= 16 kHz, SNR=6dB. We extract 1.5s frames from the 10s recordings and focus on the valves impulse sounds.    
   - Normal: 3691 1.5s frames (id_00: 991, id_02: 708, id_04: 1000, id_06: 992).
   - Abnormal: 479 frames (id_00: 119, others: 120).
   - Source: 10s WAVs split via Hilbert envelope filtering (threshold_factor=1.5).
-- **–6_dB_valve**: Noisy data, to be denoised and aligned with 6_dB_valve frames (planned, June 3, 2025).
-- **Preprocessing**: aT-STFT spectrograms (256x256x2, magnitude + phase, scaled [0, 1]) from 1.5s frames.
+- **–6_dB_valve**: Noisy data, to be denoised and aligned with 6_dB_valve frames (planned, in Part III, Summer 2025).
+- **Preprocessing**: AC-STFT spectrograms (256x256x2, magnitude + phase, scaled [0, 1]) from 1.5s frames.
 
 ### Pipeline Details
-#### Part I: Noise Reduction
-- **Objective**: Denoise –6 dB valve audio to create `denoised_id##` dataset, enhancing valve signals for anomaly detection.
-- **Methods**:
-  - **Beamforming**: MVDR or delay-and-sum using 8-mic TAMAGO-03 array, modeled as a prolate spheroid for diffraction (Part II simulation planned).
-  - **Ephraim-Malah Filtering**: Spectral subtraction to remove residual noise.
-  - **VAD**: Excludes artifacts (e.g., “coin coin” noise).
-- **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
-- **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
 
-#### Part II: CNN-Based Autoencoder
+#### Part I: CNN-Based Autoencoder
 - **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
 - **Model**:
   - Architecture: CNN (32→64→128 filters, Conv2D/Transpose, latent_dim=128).
@@ -57,6 +51,17 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
   - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.8 (vs. id_04’s 0.992–0.998).
 - **Results**: Awaiting Epoch 10+ metrics (AUC, confusion matrix, FN spectrograms for >4 kHz patterns).
 - **Visualizations**: ROC curve, confusion matrix, training history, error histogram, FN spectrograms (results/plots/unified).
+
+
+#### Part II: Noise Reduction
+- **Objective**: Denoise –6 dB valve audio to create `denoised_id##` dataset, enhancing valve signals for anomaly detection.
+- **Methods**:
+  - **Beamforming**: MVDR or delay-and-sum using 8-mic TAMAGO-03 array, modeled as a prolate spheroid for diffraction (Part II simulation planned).
+  - **Ephraim-Malah Filtering**: Spectral subtraction to remove residual noise.
+  - **VAD**: Excludes artifacts (e.g., “coin coin” noise).
+- **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
+- **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
+
 
 #### Part III: Comparative Analysis
 - **Objective**: Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
@@ -123,14 +128,13 @@ Rather than classifying various types of machines (pumps, fans, valves, sliders)
 
 <b> Plan  </b> 
     
-- I   Dataset MIMII
-- II  Analysis of sounds/noises
-- III Introduction to Denoising strategy
-- IV  Valve Activity Detector (VAD)
-- V   MVDR + GSC:  creation of a new dataset with single channel of denoised recordings: the GSC output.  
-- VI Classification Methodology
-- VII  Results
-- VIII   Conclusions 
+- I    Dataset: Recording environment and Set-up 
+- II   Denoising strategy
+- III  Multi-Microphone diagnosis sensor.
+- IV   Valve Activity Detection (VAD) 
+- V   Early Results Beamforming
+- VI  References
+- VII   Conclusions 
     
     
 <b> Potential Applications </b>  
@@ -198,7 +202,7 @@ We will work with the Valve dataset only, therefore with a beamformer steered at
 https://www.sifi.co.jp/en/product/microphone-array/
     
 
-##  Denoising ? 
+##  Denoising strategy
 
 <br>
 
@@ -342,7 +346,7 @@ Parameters for Denoising the Recordings:
 
 This procedure is detailed in the Jupyter Notebook: Part I: Preliminary Activities.
 
-##  Valve Activity Detection (VAD)
+## Valve Activity Detection (VAD) 
 
 <br> 
 <span style="color:#4169E1">  
@@ -427,6 +431,9 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 
 
 <b><i>Part I: Preliminary Activities</i></b>    (includes the General Introduction)
+
+-**Part I: CNN Autoencoder for Valve Defect Detection**  (SNR=+6dB Valve dataset)
+-**Part II:  Denoising Algorithms** 
 
 
 
