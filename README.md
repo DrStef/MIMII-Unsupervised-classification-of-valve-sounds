@@ -24,7 +24,7 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 - **Frame Alignment**: Identical 1.5s frames extracted across 6 dB and –6 dB (raw/denoised) datasets using saved indices for consistency.
 - **Scalability**: Pipeline adapts to other machines (compressor, sliders...) for predictive maintenance.
 - **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR).
-- 
+
 ### Dataset
 - **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
 - **6_dB_valve**:
@@ -94,8 +94,9 @@ pip install -r requirements.txt
 
 
 
-## General Introduction
+## General Introduction (Preliminary MVDR Beamforming developments)
 
+<i> <b>Note:</b> In the preliminary stage of the project, we developed and tested MVDR beamforming using an 8-microphone Tamago array, combined with an Ephraim-Malah denoising algorithm, to support future denoising of the -6dB valve dataset. This introduction and its results are kept as is and will not be included in the notebook’s Part II: Denoising Strategy. </i>
 <b>This document is under construction.</b> (Sept 17th, 2024- Update June 2025)
 
 <span style="color:#4169E1">  
