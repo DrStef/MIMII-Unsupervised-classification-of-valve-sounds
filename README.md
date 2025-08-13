@@ -95,10 +95,10 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
   - **Confusion Matrix**: [[406 73]; [23 456]] (True Negatives: 406, True Positives: 456)
   - **Training History**: Loss and validation loss over 40 epochs, showing convergence (plots saved at `C:\Users\drste\Project_IA\Notebooks\path\to\your\results`).
     
-| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_RocAuc_v01.png" width="350"  /> </p> |   
+| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_History_v01.png" width="350"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_RocAuc_v01.png" width="300"  /> </p> |   
 | ---       |   ---  |   
 | <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
-| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_MSE_v01.png" width="400"  /> </p> |   
+| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_MSE_v01.png" width="350"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
  
 <br>
@@ -134,13 +134,13 @@ R=0.068/2 % Radius of the circular array in meter (m)
     RP(7,:)= [Rcos(270pi/180) Rsin(270pi/180) 0.00]
     RP(8,:)= [Rcos(315pi/180) Rsin(315pi/180) 0.00]
 
-|<p align="center"> <img src="results/plot/Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="results/plot/DI_00deg_sig5_1em4.png" width="400"  /> </p> |
+|<p align="center"> <img src="results/plot/Wopt_00deg.png" width="400"  /> </p> |  <p align="center"> <img src="results/plot/DI_00deg_sig5_1em4.png" width="350"  /> </p> |
 |       ---       |         ---       | 
 | <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
     
 ####  MVDR beamforming
     
-| <p align="center"> <img src="results/plot/8micsArray_mvdr_DI_z0_freq.png" width="350"  /> </p> |  
+| <p align="center"> <img src="results/plot/8micsArray_mvdr_DI_z0_freq.png" width="300"  /> </p> |  
 |       ---       |       
 | <center> <b><i> Directivity v. Frequency - Horizontal plane. </i></b> </center> |     
     
@@ -156,7 +156,7 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 ####  pseudo-GSC implementation
 
     
-| <p align="center"> <img src="results/plot/GSC_blockdiagram.png" width="600"  /> </p> |  
+| <p align="center"> <img src="results/plot/GSC_blockdiagram.png" width="400"  /> </p> |  
 | ---       |   
 | <center> <b><i> GSC Block-Diagram from [6] </i></b> </center> |       
    
