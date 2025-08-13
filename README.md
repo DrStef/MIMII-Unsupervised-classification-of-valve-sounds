@@ -52,10 +52,10 @@ Uses **AC-STFT** (novel custom transform) for robust anomaly detection across va
 We will compare results versus c-STFT: Standard complex STFT (magnitude and unwrapped phase along time axis). 
 
    
-| <p align="center"> <img src="results\plot\stft_magnitude_spectrograms_1p5s_June02_v08.png" width="500"  /> </p> |   <p align="center"> <img src="results/plot/stft_phase_spectrograms_1p5s_June02_v08.png" width="500"  /> </p> |   
+| <p align="center"> <img src="results\plot\stft_magnitude_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/stft_phase_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   
 | ---       |   ---  |   
 | <center> <b><i> Magnitude STFT </i></b> </center> |   <center> <b><i> Unwrap Phase STFT </i></b> </center> |  
-| <p align="center"> <img src="results/plot/acstft_magnitude_spectrograms_1p5s_July03_v08.png" width="500"  /> </p> |   <p align="center"> <img src="results/plot/acstft_phase_spectrograms_1p5s_July03_v08.png" width="500"  /> </p> |   
+| <p align="center"> <img src="results/plot/acstft_magnitude_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/acstft_phase_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   
 | <center> <b><i> Magnitude AC-STFT </i></b> </center> |   <center> <b><i> Phase AC-STFT </i></b> </center> |  
 <div align="center">Top: normal valves, bottom: abnormal valves</div>   
 
