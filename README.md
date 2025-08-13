@@ -139,7 +139,7 @@ R=0.068/2 % Radius of the circular array in meter (m)
     RP(7,:)= [Rcos(270pi/180) Rsin(270pi/180) 0.00]
     RP(8,:)= [Rcos(315pi/180) Rsin(315pi/180) 0.00]
 
-|<p align="center"> <img src="results/plot/Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="results/plot/DI_90deg_sig5_1em4.png" width="400"  /> </p> |
+|<p align="center"> <img src="results/plot/Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="results/plot/DI_00deg_sig5_1em4.png" width="400"  /> </p> |
 |       ---       |         ---       | 
 | <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
     
