@@ -8,7 +8,7 @@ $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
 <h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
 
-This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [Bloo Audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
+This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [bloo audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
 
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
@@ -20,10 +20,10 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 ### Key Features
 
 - **AC-STFT Features**: Proprietary complex transform (256x256x2 spectrograms magnitude+phase, hop_length=91, n_fft=512) detects anomalies, outperforming STFT by ~25% (AUC: 0.992–0.998 vs. 0.7416 for id_04).
-- **CNN Autoencoder**: Unsupervised model (latent_dim=128, dropout=0.5, L2=0.002) trained on normal frames, achieving AUC > 0.8 (ongoing, June 3, 2025).
+- **CNN Autoencoder**: Unsupervised model (latent_dim=128, dropout=0.5, L2=0.002) trained on normal frames, achieving AUC > 0.9 (ongoing, June 3, 2025).
 - **Frame Alignment**: Identical 1.5s frames extracted across 6 dB and –6 dB (raw/denoised) datasets using saved indices for consistency.
 - **Scalability**: Pipeline adapts to other machines (compressor, sliders...) for predictive maintenance.
-- **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR).
+- **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR dataset).
 
 ### Dataset
 - **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
@@ -45,12 +45,44 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
   - Optimizer: Adam with ReduceLROnPlateau (factor=0.5, patience=3, min_lr=1e-6).
   - Loss: MSE, batch_size=64, epochs=30, early stopping (patience=10).
 - **Training**:
-  - Data: `ids_X_train` (3691 normal, 256x256x2), `ids_X_test` (958: 479 normal + 479 abnormal, seed=25).
+  - Data: `ids_X_train` (3691 normal, 256x256x2), balanced `ids_X_test` (958: 479 normal + 479 abnormal, seed=25).
   - Initial Run (Stopped, Epoch 10): Overfitting (loss=0.0467, val_loss=0.0848, gap=0.0381, spike to 0.1111).
   - Retraining (June 3, 2025, Ongoing): Improved at Epoch 8 (loss=0.0500, val_loss=0.0529, gap=0.0029, lr=0.0010).
-  - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.8 (vs. id_04’s 0.992–0.998).
-- **Results**: Awaiting Epoch 10+ metrics (AUC, confusion matrix, FN spectrograms for >4 kHz patterns).
-- **Visualizations**: ROC curve, confusion matrix, training history, error histogram, FN spectrograms (results/plots/unified).
+  - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.9 (vs. id_04’s 0.992–0.998).
+
+ - **Single Valve Model Performance  AC-STFT**: The CNN autoencoder, trained on +6dB valve sounds (`id_04`) using the novel **AC-STFT** achieves:
+  - **ROC AUC**: 1.000
+  - **Accuracy**: 0.992
+  - **Precision**: 0.992
+  - **Recall**: 0.992
+  - **F1-score**: 0.992
+  - **Confusion Matrix**: [[119 1], [1 119]] (True Negatives: 119, True Positives: 119)
+
+| <p align="center"> <img src=".\results\plots\id04_ModelACSTFT_seed42_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src=".\results\plots\id04_ModelACSTFT_seed42_RocAuc_v01.png" width="350"  /> </p> |   
+| ---       |   ---  |   
+| <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
+| <p align="center"> <img src=".\results\plots\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plots\id04_ModelACSTFT_seed42_MSE_v01.png" width="400"  /> </p> |   
+| <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
+
+
+- **Unified Model Performance**: The CNN autoencoder, trained on +6dB valve sounds (`id_00, id_02, id_04, id_06`) using the novel **AC-STFT** achieves:
+  - **ROC AUC**: 0.958
+  - **Accuracy**: 0.900
+  - **Precision**: 0.862
+  - **Recall**: 0.952
+  - **F1-score**: 0.905
+  - **Confusion Matrix**: [[406 73]; [23 456]] (True Negatives: 406, True Positives: 456)
+  - **Training History**: Loss and validation loss over 40 epochs, showing convergence (plots saved at `C:\Users\drste\Project_IA\Notebooks\path\to\your\results`).
+    
+| <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_RocAuc_v01.png" width="350"  /> </p> |   
+| ---       |   ---  |   
+| <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
+| <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_MSE_v01.png" width="400"  /> </p> |   
+| <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
+ 
+
+
+
 
 
 #### Part II: Noise Reduction
