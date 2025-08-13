@@ -156,6 +156,13 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
 
 
+    
+|<p align="center"> <img src="results/plot/8micsArray_mvdr_500Hz.png" width="250"  /> </p> |  <p align="center"> <img src="results/plot/8micsArray_mvdr_1000Hz.png" width="250"  /> </p> |   <p align="center"> <img src="results/plot/8micsArray_mvdr_5000Hz.png" width="250"  /> </p>        |
+|       ---       |         ---       |  ---  |
+| <center> <b><i> Beampattern 500Hz  </i></b> </center> | <center> <b><i> Beampattern 1000Hz </i></b> </center> |   <center> <b><i> Beampattern 5000Hz </i></b> </center>       |
+    
+   
+
 
 
 
