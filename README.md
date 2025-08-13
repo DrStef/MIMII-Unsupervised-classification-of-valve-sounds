@@ -5,7 +5,6 @@ $$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection 
 $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
 
-
 <h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
 
 This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [bloo audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
@@ -39,9 +38,9 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
     
 
 
-### Pipeline Details
+## Pipeline Details
 
-#### Part I: CNN-Based Autoencoder
+### Part I: CNN-Based Autoencoder
 - **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
 
 - **Feature Extraction:  AC_STFT**
@@ -92,8 +91,6 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 <br>
 
 
-
-
 - **Unified Model Performance**: The CNN autoencoder, trained on +6dB valve sounds (`id_00, id_02, id_04, id_06`) using the novel **AC-STFT** achieves:
   - **ROC AUC**: 0.958
   - **Accuracy**: 0.900
@@ -118,7 +115,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 
 
 
-#### Part II: Noise Reduction
+## Part II: Noise Reduction
 - **Objective**: Denoise –6 dB valve audio to create `denoised_id##` dataset, enhancing valve signals for anomaly detection.
 - **Methods**:
   - **Beamforming**: MVDR or delay-and-sum using 8-mic TAMAGO-03 array, modeled as a prolate spheroid for diffraction (Part II simulation planned).
@@ -126,6 +123,9 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
   - **VAD**: Excludes artifacts.
 - **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
 - **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
+
+
+####  Microphone Array
 
 R=0.068/2 % Radius of the circular array in meter (m)
 % Circular array geometry
@@ -143,9 +143,7 @@ R=0.068/2 % Radius of the circular array in meter (m)
 |       ---       |         ---       | 
 | <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
     
-
-
-####  MVDR Beampatterns
+####  MVDR beamforming
     
 | <p align="center"> <img src="results/plot/8micsArray_mvdr_DI_z0_freq.png" width="350"  /> </p> |  
 |       ---       |       
@@ -154,14 +152,49 @@ R=0.068/2 % Radius of the circular array in meter (m)
 
 The main beam is steered at 000 degrees. In the valve direction. <br>
 
-
-
     
 |<p align="center"> <img src="results/plot/8micsArray_mvdr_500Hz.png" width="250"  /> </p> |  <p align="center"> <img src="results/plot/8micsArray_mvdr_1000Hz.png" width="250"  /> </p> |   <p align="center"> <img src="results/plot/8micsArray_mvdr_5000Hz.png" width="250"  /> </p>        |
 |       ---       |         ---       |  ---  |
 | <center> <b><i> Beampattern 500Hz  </i></b> </center> | <center> <b><i> Beampattern 1000Hz </i></b> </center> |   <center> <b><i> Beampattern 5000Hz </i></b> </center>       |
     
    
+####  pseudo-GSC implementation
+
+    
+| <p align="center"> <img src="results/plot/GSC_blockdiagram.png" width="600"  /> </p> |  
+| ---       |   
+| <center> <b><i> GSC Block-Diagram from [6] </i></b> </center> |       
+   
+
+
+
+####  Valve Activity Detection
+
+
+
+
+
+
+
+####  Preliminary Results
+
+Application of MVDR and Ephraim-Malah gain, with an without VAD (Valve Activity Detection).  
+Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'. 
+    
+    
+ |<p align="center"> <img src="results/plot/NR_10sClip_mvdr_em_novad.png" width="700"  /> </p> |  
+ |       ---       |   
+ | <center> <b><i> MVDR+EM noise reduction.  </i></b> </center> |      
+ |   <p align="center"> <img src="results/plot/NR_10sClip_mvdr_em_vad.png" width="700"  /> </p> |
+| <center> <b><i> MVDR+EM noise reduction. With VAD. </i></b> </center> |     
+    
+        
+    
+
+
+
+
+
 
 
 
@@ -169,8 +202,12 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
 <br>
 <br>
+<br>
+<br>
 
-#### Part III: Comparative Analysis
+
+
+## Part III: Comparative Analysis  (under construction - August 2025)
 - **Objective**: Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
 - **Frame Alignment Strategy**:
   - Extract 1.5s frames from 6_dB_valve 10s WAVs (Hilbert envelope, hop=100 ms), saving indices (valve_id, file_name, label, frame_number, start_time) to `results/6dB_frame_indices.csv`.
@@ -179,18 +216,11 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 - **Analysis**: Train/test autoencoders on raw/denoised –6 dB data, report AUCs, and compare to 6_dB_valve.
 
 ### Results
-- **id_04 (Single Valve, 1.5s, Seed=25)**: AUC=0.992 (vs. 0.998 seed=42), val_loss ~0.0501, gap ~0.0044.
-- **Unified Model (All Valves, Retraining)**:
-  - Epoch 8 (June 3, 2025): loss=0.0500, val_loss=0.0529, gap=0.0029.
-  - Awaiting final AUC, confusion matrix (TN, FP, FN, TP), F1-score.
-- **id_02 Note**: Monitoring 708 normal frames (vs. ~1000 others); augmentation (time-shifting, noise_factor=0.05) planned if AUC < 0.8.
-- **Plots**: ROC, confusion matrix, FN spectrograms (results/plots/unified) for Part II and TRANE pitch.
 
 ### Future Work
 - **–6 dB Denoising**: Implement 8-mic pipeline (beamforming, Ephraim-Malah) for Part I, extract aligned frames for Part III.
-- **TRANE Application**: Adapt pipeline for compressor monitoring (8-mic arrays, vibration sensors), as pitched to TRANE Canada (PowerPoint in development).
-- **ClearFormer Exploration**: Future project on Google’s ClearFormer for ASR noise reduction (time-frequency masks), separate from MIMII.
-- **LinkedIn Showcase**: Post updated AUCs, plots, and PowerPoint schematic (inspired by ResearchGate, 2022) on [Your Company LinkedIn].
+- **Industrial Applications**: Adapt pipeline for compressor monitoring (8-mic arrays, vibration sensors).
+
 
 ### Installation
 ```bash
