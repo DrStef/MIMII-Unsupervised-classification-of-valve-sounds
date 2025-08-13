@@ -64,6 +64,11 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 | <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_MSE_v01.png" width="400"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
 
+<br>
+<br>
+
+
+
 
 - **Unified Model Performance**: The CNN autoencoder, trained on +6dB valve sounds (`id_00, id_02, id_04, id_06`) using the novel **AC-STFT** achieves:
   - **ROC AUC**: 0.958
@@ -74,12 +79,16 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
   - **Confusion Matrix**: [[406 73]; [23 456]] (True Negatives: 406, True Positives: 456)
   - **Training History**: Loss and validation loss over 40 epochs, showing convergence (plots saved at `C:\Users\drste\Project_IA\Notebooks\path\to\your\results`).
     
-| <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_RocAuc_v01.png" width="350"  /> </p> |   
+| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_RocAuc_v01.png" width="350"  /> </p> |   
 | ---       |   ---  |   
 | <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
-| <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plots\UnifiedModelACSTFT_MSE_v01.png" width="400"  /> </p> |   
+| <p align="center"> <img src="results/plot/UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_MSE_v01.png" width="400"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
  
+<br>
+<br>
+
+
 
 
 
