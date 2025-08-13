@@ -51,12 +51,12 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
   - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.9 (vs. id_04’s 0.992–0.998).
 
  - **Single Valve Model Performance  AC-STFT**: The CNN autoencoder, trained on +6dB valve sounds (`id_04`) using the novel **AC-STFT** achieves:
-  - **ROC AUC**: 1.000
-  - **Accuracy**: 0.992
-  - **Precision**: 0.992
-  - **Recall**: 0.992
-  - **F1-score**: 0.992
-  - **Confusion Matrix**: [[119 1], [1 119]] (True Negatives: 119, True Positives: 119)
+   - **ROC AUC**: 1.000
+   - **Accuracy**: 0.992
+   - **Precision**: 0.992
+   - **Recall**: 0.992
+   - **F1-score**: 0.992
+   - **Confusion Matrix**: [[119 1], [1 119]] (True Negatives: 119, True Positives: 119)
 
 | <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_RocAuc_v01.png" width="350"  /> </p> |   
 | ---       |   ---  |   
