@@ -35,10 +35,34 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 - **–6_dB_valve**: Noisy data, to be denoised and aligned with 6_dB_valve frames (planned, in Part III, Summer 2025).
 - **Preprocessing**: AC-STFT spectrograms (256x256x2, magnitude + phase, scaled [0, 1]) from 1.5s frames.
 
+ 
+    
+
+
 ### Pipeline Details
 
 #### Part I: CNN-Based Autoencoder
 - **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
+
+- **Feature Extraction:  AC_STFT**
+
+ We developed a novel custom complex transform, AC-STFT, applied to 1.5s audio frames. This transform captures time-frequency relationships, revealing distinct patterns and dependencies in valve sound data. Notably, the phase component exhibits increased complexity in damaged valves, distinguishing them from normal ones. This enhances CNN autoencoder performance for anomaly detection, whether trained on a single valve type (e.g., `id_04`) or a unified model across multiple types (`id_00, id_02, id_04, id_06`).  
+Below is a comparison of normal and abnormal valve sounds using AC-STFT on a 1.5s frame, showing magnitude and phase (X, Y units in samples).
+Uses **AC-STFT** (novel custom transform) for robust anomaly detection across valve types.
+We will compare results versus c-STFT: Standard complex STFT (magnitude and unwrapped phase along time axis). 
+
+   
+| <p align="center"> <img src="results\plot\stft_magnitude_spectrograms_1p5s_June02_v08.png" width="500"  /> </p> |   <p align="center"> <img src="results/plot/stft_phase_spectrograms_1p5s_June02_v08.png" width="500"  /> </p> |   
+| ---       |   ---  |   
+| <center> <b><i> Magnitude STFT </i></b> </center> |   <center> <b><i> Unwrap Phase STFT </i></b> </center> |  
+| <p align="center"> <img src="results/plot/atstft_magnitude_spectrograms_1p5s_July03_v08.png" width="500"  /> </p> |   <p align="center"> <img src="results/plot/atstft_phase_spectrograms_1p5s_July03_v08.png" width="500"  /> </p> |   
+| <center> <b><i> Magnitude AC-STFT </i></b> </center> |   <center> <b><i> Phase AC-STFT </i></b> </center> |  
+<div align="center">Top: normal valves, bottom: abnormal valves</div>   
+
+
+
+
+
 - **Model**:
   - Architecture: CNN (32→64→128 filters, Conv2D/Transpose, latent_dim=128).
   - Regularization: Dropout=0.5, spatial dropout=0.3, L2=0.002.
