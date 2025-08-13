@@ -245,8 +245,8 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 <br>
 <br>
 
-
-## General Introduction (Preliminary MVDR Beamforming developments)
+# APPENDIX
+## General Introduction (Preliminary)
 
 <i> <b>Note:</b> In the preliminary stage of the project, we developed and tested MVDR beamforming using an 8-microphone Tamago array, combined with an Ephraim-Malah denoising algorithm, to support future denoising of the -6dB valve dataset. This introduction and its results are kept as is and will not be included in the notebook’s Part II: Denoising Strategy. </i>
 <b>This document is under construction.</b> (Sept 17th, 2024- Update June 2025)
@@ -277,18 +277,6 @@ Rather than classifying various types of machines (pumps, fans, valves, sliders)
 
 
 <i>*Note: In all noisy recordings, the background noise was captured separately using the 8-microphone array and then added to the device sounds. This was done under three SNR conditions: -6 dB, 0 dB, and 6 dB. More details can be found in the acquisition setup section.</i>
-
-
-<b> Plan  </b> 
-    
-- I    Dataset: Recording environment and Set-up 
-- II   Denoising strategy
-- III  Multi-Microphone diagnosis sensor.
-- IV   Valve Activity Detection (VAD) 
-- V   Early Results Beamforming
-- VI  References
-- VII   Conclusions 
-    
     
 <b> Potential Applications </b>  
 
