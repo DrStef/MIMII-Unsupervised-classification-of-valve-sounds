@@ -123,9 +123,28 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 - **Methods**:
   - **Beamforming**: MVDR or delay-and-sum using 8-mic TAMAGO-03 array, modeled as a prolate spheroid for diffraction (Part II simulation planned).
   - **Ephraim-Malah Filtering**: Spectral subtraction to remove residual noise.
-  - **VAD**: Excludes artifacts (e.g., “coin coin” noise).
+  - **VAD**: Excludes artifacts.
 - **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
 - **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
+
+
+
+
+####  MVDR Beampatterns
+    
+| <p align="center"> <img src="results/plot/8micsArray_mvdr_DI_z0_freq.png" width="350"  /> </p> |  
+|       ---       |       
+| <center> <b><i> Directivity v. Frequency - Horizontal plane. </i></b> </center> |     
+    
+
+The main beam is steered at 000 degrees. In the valve direction. <br>
+
+
+
+
+
+
+
 
 
 #### Part III: Comparative Analysis
