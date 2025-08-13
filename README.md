@@ -246,7 +246,7 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 <br>
 
 # APPENDIX
-## General Introduction (Preliminary)
+## General Introduction (Old)
 
 <i> <b>Note:</b> In the preliminary stage of the project, we developed and tested MVDR beamforming using an 8-microphone Tamago array, combined with an Ephraim-Malah denoising algorithm, to support future denoising of the -6dB valve dataset. This introduction and its results are kept as is and will not be included in the notebook’s Part II: Denoising Strategy. </i>
 <b>This document is under construction.</b> (Sept 17th, 2024- Update June 2025)
