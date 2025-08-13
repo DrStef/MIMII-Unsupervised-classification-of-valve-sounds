@@ -547,22 +547,3 @@ https://github.com/user-attachments/assets/c4e86685-4dbe-4a32-aa33-dfcb5771128d
 
 
 
-##   Notebooks
-
-
-<b><i>Part I: Preliminary Activities</i></b>    (includes the General Introduction)
-
--**Part I: CNN Autoencoder for Valve Defect Detection**  (SNR=+6dB Valve dataset)
--**Part II:  Denoising Algorithms** 
-
-
-
-
-
-
-
-
-
-
-
-
