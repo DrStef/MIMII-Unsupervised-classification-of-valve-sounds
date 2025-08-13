@@ -42,9 +42,8 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 
 ### Part I: CNN-Based Autoencoder
 - **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
-
 - **Feature Extraction:  AC_STFT**
-
+- 
  We developed a novel custom complex transform, AC-STFT, applied to 1.5s audio frames. This transform captures time-frequency relationships, revealing distinct patterns and dependencies in valve sound data. Notably, the phase component exhibits increased complexity in damaged valves, distinguishing them from normal ones. This enhances CNN autoencoder performance for anomaly detection, whether trained on a single valve type (e.g., `id_04`) or a unified model across multiple types (`id_00, id_02, id_04, id_06`).  
 Below is a comparison of normal and abnormal valve sounds using AC-STFT on a 1.5s frame, showing magnitude and phase (X, Y units in samples).
 Uses **AC-STFT** (novel custom transform) for robust anomaly detection across valve types.
@@ -57,10 +56,6 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 | <p align="center"> <img src="results/plot/acstft_magnitude_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/acstft_phase_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   
 | <center> <b><i> Magnitude AC-STFT </i></b> </center> |   <center> <b><i> Phase AC-STFT </i></b> </center> |  
 <div align="center">Top: normal valves, bottom: abnormal valves</div>   
-
-
-
-
 
 - **Model**:
   - Architecture: CNN (32→64→128 filters, Conv2D/Transpose, latent_dim=128).
@@ -226,6 +221,23 @@ Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'.
 ```bash
 pip install -r requirements.txt
 ```
+
+##   References
+
+<br>
+
+https://github.com/MIMII-hitachi/mimii_baseline/ 
+
+[1] Harsh Purohit, Ryo Tanabe, Kenji Ichige, Takashi Endo, Yuki Nikaido, Kaori Suefusa, and Yohei Kawaguchi, <i>“MIMII Dataset: Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection,”</i> arXiv preprint arXiv:1909.09347, 2019.
+
+[2] Harsh Purohit, Ryo Tanabe, Kenji Ichige, Takashi Endo, Yuki Nikaido, Kaori Suefusa, and Yohei Kawaguchi, <i>“MIMII Dataset: Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection,” </i> in Proc. 4th Workshop on Detection and Classification of Acoustic Scenes and Events (DCASE), 2019.
+
+[3] Y. Kawaguchi, R. Tanabe, T. Endo, K. Ichige, and K. Hamada, <i>“Anomaly detection based on an ensemble of dereverberation and anomalous sound extraction,”</i> in Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2019, pp. 865–869
+
+[5] M. Brandstein and D. Ward, “Microphone Arrays: Signal Processing Techniques and Applications,” Digital Signal Processing, 2001, Springer. 
+
+[6] Nilesh Madhu and Rainer Martin, <i>"A Versatile Framework for Speaker Separation Using a Model-Based Speaker Localization Approach" </i>, October 2011 IEEE Transactions on Audio Speech and Language Processing 19(7):1900 - 1912, DOI:10.1109/TASL.2010.2102754
+
 
 
 
@@ -541,27 +553,6 @@ https://github.com/user-attachments/assets/ecfa8963-bb75-4864-99d7-4e31257d3b4a
 <b><i>GSC output with Valve Activity Detection: </i></b> 
 
 https://github.com/user-attachments/assets/c4e86685-4dbe-4a32-aa33-dfcb5771128d
-
-
-
-##   References
-
-<br>
-
-https://github.com/MIMII-hitachi/mimii_baseline/
-    
-
-[1] Harsh Purohit, Ryo Tanabe, Kenji Ichige, Takashi Endo, Yuki Nikaido, Kaori Suefusa, and Yohei Kawaguchi, <i>“MIMII Dataset: Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection,”</i> arXiv preprint arXiv:1909.09347, 2019.
-
-[2] Harsh Purohit, Ryo Tanabe, Kenji Ichige, Takashi Endo, Yuki Nikaido, Kaori Suefusa, and Yohei Kawaguchi, <i>“MIMII Dataset: Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection,” </i> in Proc. 4th Workshop on Detection and Classification of Acoustic Scenes and Events (DCASE), 2019.
-
-[3] Y. Kawaguchi, R. Tanabe, T. Endo, K. Ichige, and K. Hamada, <i>“Anomaly detection based on an ensemble of dereverberation and anomalous sound extraction,”</i> in Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2019, pp. 865–869
-
-[5] M. Brandstein and D. Ward, “Microphone Arrays: Signal Processing Techniques and Applications,” Digital Signal Processing, 2001, Springer. 
-
-
-[6] Nilesh Madhu and Rainer Martin, <i>"A Versatile Framework for Speaker Separation Using a Model-Based Speaker Localization Approach" </i>, October 2011 IEEE Transactions on Audio Speech and Language Processing 19(7):1900 - 1912, DOI:10.1109/TASL.2010.2102754
-
 
 
 
