@@ -76,10 +76,10 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
    - **F1-score**: 0.992
    - **Confusion Matrix**: [[119 1], [1 119]] (True Negatives: 119, True Positives: 119)
 
-| <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_History_v01.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_RocAuc_v01.png" width="350"  /> </p> |   
+| <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_History_v01.png" width="350"  /> </p> |   <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_RocAuc_v01.png" width="300"  /> </p> |   
 | ---       |   ---  |   
 | <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
-| <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_MSE_v01.png" width="400"  /> </p> |   
+| <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_MSE_v01.png" width="350"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
 
 <br>
