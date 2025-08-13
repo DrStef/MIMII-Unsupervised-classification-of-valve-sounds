@@ -43,7 +43,7 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 ### Part I: CNN-Based Autoencoder
 - **Objective**: Train an autoencoder on normal 6_dB_valve frames to detect anomalies (high reconstruction errors).
 - **Feature Extraction:  AC_STFT**
-- 
+ 
  We developed a novel custom complex transform, AC-STFT, applied to 1.5s audio frames. This transform captures time-frequency relationships, revealing distinct patterns and dependencies in valve sound data. Notably, the phase component exhibits increased complexity in damaged valves, distinguishing them from normal ones. This enhances CNN autoencoder performance for anomaly detection, whether trained on a single valve type (e.g., `id_04`) or a unified model across multiple types (`id_00, id_02, id_04, id_06`).  
 Below is a comparison of normal and abnormal valve sounds using AC-STFT on a 1.5s frame, showing magnitude and phase (X, Y units in samples).
 Uses **AC-STFT** (novel custom transform) for robust anomaly detection across valve types.
