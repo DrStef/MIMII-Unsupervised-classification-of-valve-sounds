@@ -127,7 +127,22 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 - **Status**: Denoising pipeline in development, to be applied to –6 dB 10s WAVs before 1.5s frame extraction (IA laptop, June 3, 2025).
 - **Output**: Denoised WAVs in `-6_dB_valve/denoised`, aligned with 6_dB_valve frames.
 
+R=0.068/2 % Radius of the circular array in meter (m)
+% Circular array geometry
 
+    RP(1,:)= [R 0 0.00]
+    RP(2,:)= [Rcos(45pi/180) Rsin(45pi/180) 0.00]
+    RP(3,:)= [Rcos(90pi/180) Rsin(90pi/180) 0.00]
+    RP(4,:)= [Rcos(135pi/180) Rsin(135pi/180) 0.00]
+    RP(5,:)= [R*cos(pi) 0 0.00]
+    RP(6,:)= [Rcos(225pi/180) Rsin(225pi/180) 0.00]
+    RP(7,:)= [Rcos(270pi/180) Rsin(270pi/180) 0.00]
+    RP(8,:)= [Rcos(315pi/180) Rsin(315pi/180) 0.00]
+
+|<p align="center"> <img src="results/plot/Wopt_00deg.png" width="450"  /> </p> |  <p align="center"> <img src="results/plot/DI_00deg_sig5_1em4.png" width="400"  /> </p> |
+|       ---       |         ---       | 
+| <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
+    
 
 
 ####  MVDR Beampatterns
