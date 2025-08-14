@@ -36,7 +36,7 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 
 ### Data Acquisition and datasets
 
-The MIMII dataset (CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388) provides audio recordings from an 8-microphone circular array capturing valve sounds in real factory environments. Recordings include normal and faulty valve conditions under three signal-to-noise ratios (SNRs): -6 dB, 0 dB, and 6 dB. Background noise was recorded separately and added to the valve sounds to simulate noisy industrial settings. Audio clips (16 kHz, 1-3 seconds) are stored in `data/VAD_valves/` for +6 dB and `data/VAD_noise/` for -6 dB datasets, used for training and evaluating the CNN-Autoencoder and denoising pipeline. 
+The MIMII dataset (CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388) provides audio recordings from an 8-microphone circular array capturing valve sounds in real factory environments. Recordings include normal and faulty valve conditions under three signal-to-noise ratios (SNRs): -6 dB, 0 dB, and 6 dB. Background noise was recorded separately and added to the valve sounds to simulate noisy industrial settings. Audio clips (16 kHz, 1-3 seconds) are stored in `data/VAD_valves/` for +6 dB and `data/VAD_noise/` for -6 dB datasets, used for training and evaluating the CNN-Autoencoder and denoising pipeline. Recording environment and setup are detailed in Appendix A, and the microphone array is described in Appendix B.
 
 - **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
 - **6_dB_valve**:
