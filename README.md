@@ -62,8 +62,17 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
   - Regularization: Dropout=0.5, spatial dropout=0.3, L2=0.002.
   - Optimizer: Adam with ReduceLROnPlateau (factor=0.5, patience=3, min_lr=1e-6).
   - Loss: MSE, batch_size=64, epochs=30, early stopping (patience=10).
+ 
+
+    
+| <p align="center"> <img src="results/plot/CNN_Autoencoder.png" width="700"  /> </p> |   
+|:---:|   
+| <center> <b><i> CNN-Autoencoder architecture </i></b> </center> |  
+ 
+  
+
 - **Training**:
-  - Data: `ids_X_train` (3691 normal, 256x256x2), balanced `ids_X_test` (958: 479 normal + 479 abnormal, seed=25).
+  - Data: `ids_X_train` (3691 normal, 256x256x2), balanced `ids_X_test` (958: 479 normal + 479 abnormal, seed=25) for the "unified case", (240: 120 normal + 120 abnormal, seed=25).
   - Initial Run (Stopped, Epoch 10): Overfitting (loss=0.0467, val_loss=0.0848, gap=0.0381, spike to 0.1111).
   - Retraining (June 3, 2025, Ongoing): Improved at Epoch 8 (loss=0.0500, val_loss=0.0529, gap=0.0029, lr=0.0010).
   - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.9 (vs. id_04’s 0.992–0.998).
