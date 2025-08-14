@@ -12,9 +12,9 @@ This repository hosts an unsupervised classification pipeline for detecting valv
 
 <br> 
 
-- **Potential Applications** - 
-- <b> Rotating machinery </b> Failure Detection: bearings, motors,rotors.  
-- <b> HVAC </b> Fault detection and diagnosis (FDD): pumps, compressors, valves.                  
+### Potential Applications
+  - <b> Rotating machinery </b> Failure Detection: bearings, motors,rotors.  
+  - <b> HVAC </b> Fault detection and diagnosis (FDD): pumps, compressors, valves.                  
 <br> 
 <b>Keywords:</b> Python, TensorFlow, Deep Learning, ACSTFT
 
