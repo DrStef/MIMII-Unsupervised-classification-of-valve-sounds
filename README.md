@@ -256,6 +256,8 @@ Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'.
 ```bash
 pip install -r requirements.txt
 ```     -->
+<br>
+<br>
 
 ##   References
 
@@ -275,8 +277,6 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 
 
 
-<br>
-<br>
 <br>
 <br>
 
