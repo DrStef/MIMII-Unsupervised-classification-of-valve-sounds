@@ -7,18 +7,18 @@ $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
 <h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
 
-
 This repository hosts an unsupervised classification pipeline for detecting valve anomalies in industrial machinery, addressing costly failures through acoustic monitoring with the MIMII dataset (valves, -6 dB, 0 dB, 6 dB SNR; CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388). Unlike traditional MIMII approaches that classify noisy signals directly, we denoise multi-channel audio from an 8-microphone TAMAGO-03 array (16 kHz, 16-bit) using MVDR beamforming and a custom static Generalized Sidelobe Canceler (GSC) with Ephraim-Malah gain, transforming the array into a noise-robust “smart sensor.” Our proprietary AC-STFT transform achieves an ROC AUC of 0.99 on the +6dB valve dataset, powering a CNN-based autoencoder for robust anomaly detection (e.g., contamination, leakage). Targeting applications like predictive maintenance for HVAC systems (e.g., TRANE compressors), the pipeline includes frame alignment for consistent performance in noisy factories. Developed by [bloo audio], ongoing results are showcased on  ([LinkedIn](https://www.linkedin.com/in/sdedieu/)). Explore code, notebooks, and visualizations below.
 
 <br> 
 
 ### Potential Applications
-  - <b> Rotating machinery </b> Failure Detection: bearings, motors,rotors.  
-  - <b> HVAC </b> Fault detection and diagnosis (FDD): pumps, compressors, valves.                  
-<br> 
-<b>Keywords:</b> Python, TensorFlow, Deep Learning, ACSTFT
+This pipeline, leveraging Python, TensorFlow, Deep Learning, AC-STFT, and IoT, supports real-time anomaly detection in dynamic signals from sensors (microphones, accelerometers, piezosensors, electromagnetic sensors, multisensor arrays). Applications include:
 
-<br>
+- **Rotating Machinery Failure Detection**: Bearings, motors, rotors.
+- **HVAC Fault Detection and Diagnosis (FDD)**: Pumps, compressors, valves.
+- **Additional Use Cases**: Wind turbine monitoring, structural health monitoring (bridges, buildings), automotive engine diagnostics, railway track/train monitoring, medical device monitoring, and multisensor systems for noise, vibration, and electromagnetic field reduction in industrial IoT deployments.
+
+<b>Keywords:</b> Python, TensorFlow, Deep Learning, ACSTFT, IoT
 
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
