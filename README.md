@@ -65,7 +65,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
  
 
     
-| <p align="center"> <img src="results/plot/CNN_Autoencoder.png" width="700"  /> </p> |   
+| <p align="center"> <img src="results/plot/CNN_Autoencoder.png" width="500"  /> </p> |   
 |:---:|   
 | <center> <b><i> CNN-Autoencoder architecture </i></b> </center> |  
  
