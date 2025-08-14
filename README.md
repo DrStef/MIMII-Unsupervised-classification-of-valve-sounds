@@ -7,7 +7,14 @@ $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
 <h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
 
-This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [bloo audio], with ongoing results showcased on ([LinkedIn](https://www.linkedin.com/in/sdedieu/))    
+
+This repository hosts an unsupervised classification pipeline for detecting valve anomalies in industrial machinery, addressing costly failures through acoustic monitoring with the MIMII dataset (valves, -6 dB, 0 dB, 6 dB SNR; CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388). Unlike traditional MIMII approaches that classify noisy signals directly, we denoise multi-channel audio from an 8-microphone TAMAGO-03 array (16 kHz, 16-bit) using MVDR beamforming and a custom static Generalized Sidelobe Canceler (GSC) with Ephraim-Malah gain, transforming the array into a noise-robust “smart sensor.” Our proprietary AC-STFT transform achieves an ROC AUC of 0.99 on the +6dB valve dataset, powering a CNN-based autoencoder for robust anomaly detection (e.g., contamination, leakage). Targeting applications like predictive maintenance for HVAC systems (e.g., TRANE compressors), the pipeline includes frame alignment for consistent performance in noisy factories. Developed by [bloo audio], ongoing results are showcased on  ([LinkedIn](https://www.linkedin.com/in/sdedieu/)). Explore code, notebooks, and visualizations below.
+
+<br>
+
+
+
+This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [bloo audio], with ongoing results showcased on
 
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
