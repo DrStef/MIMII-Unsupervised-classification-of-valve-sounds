@@ -64,9 +64,9 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
    
 | <p align="center"> <img src="results\plot\stft_magnitude_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/stft_phase_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   
 |:---:|:---:|   
-| <center> <b><i> Magnitude STFT </i></b> </center> |   <center> <b><i> Unwrap Phase STFT </i></b> </center> |  
+| <center> <i> STFT: Magnitude </i></center> |   <center> <i> STFT: Unwrap Phase </i> </center> |  
 | <p align="center"> <img src="results/plot/acstft_magnitude_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/acstft_phase_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   
-| <center> <i> Magnitude AC-STFT </i> </center> |   <center> <i> Phase AC-STFT </i></center> |  
+| <center> <i> AC-STFT: Magnitude  </i> </center> |   <center> <i> AC-STFT: Phase  </i></center> |  
 <div align="center">Top: normal valves, bottom: abnormal valves</div>   
 
 - **Model**:
@@ -99,7 +99,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 
 | <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_History_v01.png" width="350"  /> </p> |   <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_RocAuc_v01.png" width="300"  /> </p> |   
 |:---:|:---:|   
-| <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
+| <center> <i> Training History</i> </center> |   <center><i> ROC-AUC  </i> </center> |  
 | <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_MSE_v01.png" width="350"  /> </p> |   
 | <center> <i> Confusion Matrix </i> </center> |   <center> <i> Reconstruction error (MSE) </i> </center> |  
 
