@@ -313,7 +313,7 @@ Part of this dataset: Single channel microphone only, plus Toy car, Toy conveyor
 https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds <br>
 https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring    
     
-#### B. Microphone Array     
+### B. Microphone Array     
     
 The MIMII dataset was recorded with the following 8-microphones array:  <br> 
 
