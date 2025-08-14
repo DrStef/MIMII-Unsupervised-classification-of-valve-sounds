@@ -10,11 +10,14 @@ $$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2024 - rev. June 2025 }}$$
 
 This repository hosts an unsupervised classification pipeline for detecting valve anomalies in industrial machinery, addressing costly failures through acoustic monitoring with the MIMII dataset (valves, -6 dB, 0 dB, 6 dB SNR; CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388). Unlike traditional MIMII approaches that classify noisy signals directly, we denoise multi-channel audio from an 8-microphone TAMAGO-03 array (16 kHz, 16-bit) using MVDR beamforming and a custom static Generalized Sidelobe Canceler (GSC) with Ephraim-Malah gain, transforming the array into a noise-robust “smart sensor.” Our proprietary AC-STFT transform achieves an ROC AUC of 0.99 on the +6dB valve dataset, powering a CNN-based autoencoder for robust anomaly detection (e.g., contamination, leakage). Targeting applications like predictive maintenance for HVAC systems (e.g., TRANE compressors), the pipeline includes frame alignment for consistent performance in noisy factories. Developed by [bloo audio], ongoing results are showcased on  ([LinkedIn](https://www.linkedin.com/in/sdedieu/)). Explore code, notebooks, and visualizations below.
 
+<br> 
+- **Potential Applications**
+- <b> Rotating machinery </b> Failure Detection: bearings, motors,rotors.  
+- <b> HVAC </b> Fault detection and diagnosis (FDD): pumps, compressors, valves.                  
+<br> 
+<b>Keywords:</b> Python, TensorFlow, Deep Learning, ACSTFT
+
 <br>
-
-
-
-This repository hosts an unsupervised classification pipeline for detecting anomalies in industrial valve sounds using the MIMII dataset (valves, 6 dB, 0 dB, –6 dB SNR). Our solution leverages an 8-microphone array for noise reduction and a convolutional neural network (CNN)-based autoencoder for anomaly detection, targeting industrial applications like predictive maintenance for HVAC systems (e.g., TRANE compressors). The pipeline includes proprietary AC-STFT feature extraction, multi-channel denoising, and frame alignment to ensure robust performance in noisy environments. This work is developed by [bloo audio], with ongoing results showcased on
 
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
@@ -31,7 +34,10 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 - **Scalability**: Pipeline adapts to other machines (compressor, sliders...) for predictive maintenance.
 - **8-Mic Denoising**: Beamforming (e.g., MVDR) and spectral subtraction suppress factory noise, enhancing valve signals (–6 dB SNR dataset).
 
-### Dataset
+### Data Acquisition and datasets
+
+The MIMII dataset (CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388) provides audio recordings from an 8-microphone circular array capturing valve sounds in real factory environments. Recordings include normal and faulty valve conditions under three signal-to-noise ratios (SNRs): -6 dB, 0 dB, and 6 dB. Background noise was recorded separately and added to the valve sounds to simulate noisy industrial settings. Audio clips (16 kHz, 1-3 seconds) are stored in `data/VAD_valves/` for +6 dB and `data/VAD_noise/` for -6 dB datasets, used for training and evaluating the CNN-Autoencoder and denoising pipeline. 
+
 - **MIMII Dataset**: Valve sounds (id_00, id_02, id_04, id_06) at 6 dB, 0 dB, –6 dB SNR, recorded with 8-mic TAMAGO-03 array. Normal (~5000–10000s) and anomalous (~1000s) sounds per valve. [Zenodo: 10.5281/zenodo.3384388][](https://zenodo.org/records/3384388)
 - **6_dB_valve**:
 10 seconds recordings (WAV files), fs= 16 kHz, SNR=6dB. We extract 1.5s frames from the 10s recordings and focus on the valves impulse sounds.    
@@ -41,8 +47,6 @@ We aim to automatically detect valve failures (e.g., contamination, leakage) in 
 - **–6_dB_valve**: Noisy data, to be denoised and aligned with 6_dB_valve frames (planned, in Part III, Summer 2025).
 - **Preprocessing**: AC-STFT spectrograms (256x256x2, magnitude + phase, scaled [0, 1]) from 1.5s frames.
 
- 
-    
 
 
 ## Pipeline Details
@@ -262,48 +266,9 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 <br>
 
 # APPENDIX
-## General Introduction (Old)
-
-<i> <b>Note:</b> In the preliminary stage of the project, we developed and tested MVDR beamforming using an 8-microphone Tamago array, combined with an Ephraim-Malah denoising algorithm, to support future denoising of the -6dB valve dataset. This introduction and its results are kept as is and will not be included in the notebook’s Part II: Denoising Strategy. </i>
-<b>This document is under construction.</b> (Sept 17th, 2024- Update June 2025)
-
-<span style="color:#4169E1">  
-  
-Industrial machinery often experiences failures or breakdowns, leading to considerable costs for businesses. Consequently, there's growing interest in monitoring these machines with various sensors, such as microphones. <br>
-Within the scientific community, the availability of public datasets has enhanced the development of acoustic detection and classification techniques for various scenes and events. <br> 
-
-Hitachi Ltd. has developed the MIMII dataset for classifying sounds from industrial machines operating under both normal and faulty conditions in actual factory environments. This dataset includes:
-
-- Subsets of machines: pumps, valves, sliders, fans.
-- Subsets of operating conditions: normal and abnormal.
-- Background noise.
 
 
-MIMII stands for Sound Dataset for Malfunctioning Industrial Machine Investigation and Inspection. <br> Many unsupervised classification models based on this dataset can be found in the literature or on GitHub. We will provide links and references accordingly.
-
-We are developing an automatic, unsupervised classification model or an automatic diagnosis model for detecting failures or breakdowns in industrial machinery based on their acoustic characteristics, recorded with an 8-microphone circular array. Unlike most classification models found in literature, this study somewhat deviates from the initial challenge's rules: classification of noisy signals. However, since we have access to multiple channels, it makes practical sense to denoise the signals before initiating the classification process.
-
-Thus, the challenge here is transforming the 8-microphone array into a <b> "sensor" for monitoring industrial machinery sounds in noisy environments</b>. Then, we apply the classification model to these denoised signals to automatically identify anomalies, failures, or breakdowns.
-
-Rather than classifying various types of machines (pumps, fans, valves, sliders), our focus will be:
-
-- Concentrating on a specific machine type: valves.
-- Denoising the recordings using MVDR beamforming combined with a custom, fixed Generalized Sidelobe Canceler (GSC).
-- Applying unsupervised classification techniques (auto-encoder, etc.) to two sets of signals: single microphone recordings and the denoised GSC output, to detect defective valves and demonstrate the benefits of MVDR beamforming combined with GSC.
-
-
-<i>*Note: In all noisy recordings, the background noise was captured separately using the 8-microphone array and then added to the device sounds. This was done under three SNR conditions: -6 dB, 0 dB, and 6 dB. More details can be found in the acquisition setup section.</i>
-    
-<b> Potential Applications </b>  
-
-- <b> Rotating machinery </b> Failure Detection: bearings, motors,rotors.  
-- <b> HVAC </b> Fault detection and diagnosis (FDD): pumps, compressors, valves.                  
-
-<br> 
-<b>Keywords:</b> Python, TensorFlow, Deep Learning, Complex Continuous Wavelets
-
-
-## Dataset: Recording environment and Set-up 
+## A. Dataset: Recording environment and Set-up 
     
 <br>
 <span style="color:#4169E1">  
@@ -333,7 +298,7 @@ Part of this dataset: Single channel microphone only, plus Toy car, Toy conveyor
 https://dcase.community/challenge2020/task-unsupervised-detection-of-anomalous-sounds <br>
 https://dcase.community/challenge2022/task-unsupervised-anomalous-sound-detection-for-machine-condition-monitoring    
     
-#### Microphone Array     
+#### B. Microphone Array     
     
 The MIMII dataset was recorded with the following 8-microphones array:  <br> 
 
@@ -359,7 +324,7 @@ We will work with the Valve dataset only, therefore with a beamformer steered at
 https://www.sifi.co.jp/en/product/microphone-array/
     
 
-##  Denoising strategy
+##  C. Denoising strategy
 
 <br>
 
