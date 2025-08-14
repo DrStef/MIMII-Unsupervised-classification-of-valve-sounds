@@ -186,6 +186,29 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
 ####  Valve Activity Detection
 
+Just like in speech enhancement algorithms, for optimal performance, the second stage of the denoising process must cease collecting noise frames when the valve is active. Therefore, we design a VAD, not for Voice Activity Detection, but for "Valve Activity Detection".<br>
+Ideally, we should have access to valve sounds without any noise. We built labeled datasets of background noise and valve sounds consisting of 512-point mono sound frames, each lasting 32 ms, sampled at 16 kHz (512 samples). 
+ 
+- Valve sound frames: collected from the 6 dB SNR dataset, specifically Normal, id00, id02, id04, id06. Ideally, we would have access to valve sounds against a silent background, but such data is not available. We had access only to "noisy" valve sound frames, which is why we selected the best SNR data available.
+- Background noise frames: collected from the -6 dB SNR dataset, Normal, id00, id02, id04, id06, when valves are inactive.
+
+We explored Low-complexity VAD models based on FFT and Machine Learning. These models will be utilized in our two-stage Noise Reduction algorithm.
+
+Future work if necessary: High-complexity models leveraging advanced features:  Short-Time Fourier Transforms (STFT), mel-spectrograms, or wavelet transforms and Deep Learning, specifically a Convolutional Neural Network (CNN).
+
+The low-complexity models are the priority for proceeding with Noise Reduction. 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -210,17 +233,8 @@ Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'.
 
 
 
-
-
-
-
-
-
 <br>
 <br>
-<br>
-<br>
-
 
 
 ## Part III: Comparative Analysis  (under construction - August 2025)
@@ -266,10 +280,10 @@ https://github.com/MIMII-hitachi/mimii_baseline/
 <br>
 <br>
 
-# APPENDIX
+## APPENDIX
 
 
-## A. Dataset: Recording environment and Set-up 
+### A. Dataset: Recording environment and Set-up 
     
 <br>
 <span style="color:#4169E1">  
@@ -325,7 +339,7 @@ We will work with the Valve dataset only, therefore with a beamformer steered at
 https://www.sifi.co.jp/en/product/microphone-array/
     
 
-##  C. Denoising strategy
+###  C. Denoising strategy
 
 <br>
 
@@ -355,7 +369,7 @@ We plan to denoise and classify signals under the SNR = -6 dB condition, which i
 
 Fortunately, in most recordings we reviewed from the -6dB_Valve dataset, the ambient noise appears to be relatively isotropic, or at least, the primary noise source is not directly at 0 degrees. Consequently, the MVDR beamformer should effectively attenuate the ambient noise, particularly at frequencies below 1000-1500 Hz, assuming the array operates in a free field.
 
-##  Multi-Microphone diagnosis sensor.
+####  Multi-Microphone diagnosis sensor.
 
 <br>
 <span style="color:#4169E1">  
@@ -364,7 +378,7 @@ If we were to design a sensor for monitoring industrial machinery sounds in a no
 
 Here, we are going to transform the TAMAGO microphone array into a diagnostic sensor, employing proper beamforming filters and a noise reduction strategy.
 
-### Beamforming
+#### Beamforming
 
 Beamforming is a noise reduction technique based on spatial filtering. Essentially, multiple microphones capture acoustic waves, and their outputs are combined to increase the gain in a specific direction. Beamforming can be combined with classic noise reduction techniques, as we will see in the next section.
 
@@ -376,7 +390,7 @@ The 68 mm diameter microphone array, though small, with its eight microphones, r
 
 Therefore, when implementing the MVDR beamforming with the TAMAGO microphone array, we will introduce substantial regularization at low frequencies, which will compromise the Directivity Index at these frequencies.
 
-### Computing Optimal MVDR Beamforming Filters
+#### Computing Optimal MVDR Beamforming Filters
 
 The 8-microphone array is embedded within a rigid egg shape. It cannot be treated as a free-field array, except at low frequencies where the acoustic wavelength is very large compared to the size of the egg. We will assume that the TAMAGO egg is a hard prolate spheroid and will use analytical or semi-analytical models to characterize the acoustic field diffracted by the "egg". This will be explored in PART II. Once the simulation is complete, we will develop a new MIMII denoised valve dataset.
 
@@ -409,7 +423,7 @@ Beamforming Filters in the frequency domain: real_part and imaginary part are st
 Filters:  512 points, Fs= 16000 Hz, double-sided ! 
 Frequencies=[0 : Fs/NFFT : Fs-Fs/NFFT]
     
-###  Beampatterns
+####  Beampatterns
 
 We can plot the beampatterns in the horizontal plane v. frequency : 
     
@@ -428,7 +442,7 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
 <br>
 
-### Generalized Side Lobe Canceller 
+#### Generalized Side Lobe Canceller 
 
 We will use a fixed beamforming approach. The fixed GSC strategy is equivalent to a multi-channel Wiener gain. But instead of implementing a spectral difference, we can replace it with more advanced NR gains and evaluation of a priori_SNR. 
 
@@ -453,7 +467,7 @@ Initially, we will approximate without a "valve activity detector" because much 
 
 The GSC might introduce distortion into the valve sound. We will assess whether this affects the accuracy of the classification model. Such added distortion could be a significant issue for applications like Automatic Speech Recognition (ASR).
 
-### Pseudo-Real-Time Implementation:
+#### Pseudo-Real-Time Implementation:
 
 Frame-by-Frame Processing: We implement this with overlap-add, sliding an NFFT-length window over all 10-second signals with a 66% overlap. We compute the FFT, apply beamforming, and noise reduction gain in the frequency domain, then reconstruct the denoised output signals frame by frame using an IFFT.
 
@@ -467,29 +481,9 @@ Parameters for Denoising the Recordings:
 - Compute the IFFT.
 - Reconstruct the denoised signal frame by frame.
 
-This procedure is detailed in the Jupyter Notebook: Part I: Preliminary Activities.
+<!-- This procedure is detailed in the Jupyter Notebook: Part I: Preliminary Activities. -->
 
-## Valve Activity Detection (VAD) 
-
-<br> 
-<span style="color:#4169E1">  
-
-Just like in speech enhancement algorithms, for optimal performance, the second stage of the denoising process must cease collecting noise frames when the valve is active. Therefore, we design a VAD, not for Voice Activity Detection, but for "Valve Activity Detection".
-
-Ideally, we should have access to valve sounds without any noise. We built labeled datasets of background noise and valve sounds consisting of 512-point mono sound frames, each lasting 32 ms, sampled at 16 kHz. 
- 
-- Valve sound frames: collected from the 6 dB SNR dataset, specifically Normal, id00, id02, id04, id06. Ideally, we would have access to valve sounds against a silent background, but such data is not available. We had access only to "noisy" valve sound frames, which is why we selected the best SNR data available.
-- Background noise frames: collected from the -6 dB SNR dataset, Normal, id00, id02, id04, id06, when valves are inactive.
-
-In this study, we will explore:
-
-- Low-complexity VAD models based on Machine Learning. These models will be utilized in our two-stage Noise Reduction algorithm.
-- High-complexity models leveraging advanced features:  Short-Time Fourier Transforms (STFT), mel-spectrograms, or wavelet transforms and Deep Learning, specifically a Convolutional Neural Network (CNN).
-
-The low-complexity models are the priority for proceeding with Noise Reduction. Notebooks will be updated regularly with more advanced models.
-
-
-##  Early Results Beamforming
+###  Early Results Beamforming
 
 We selected an 8-channel recording for processing: id00_n_00000117.
 
