@@ -252,10 +252,10 @@ Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'.
 - **Industrial Applications**: Adapt pipeline for compressor monitoring (8-mic arrays, vibration sensors).
 
 
-### Installation
+<!-- ### Installation 
 ```bash
 pip install -r requirements.txt
-```
+```     -->
 
 ##   References
 
