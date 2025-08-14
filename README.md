@@ -23,9 +23,9 @@ This pipeline, leveraging Python, TensorFlow, Deep Learning, AC-STFT, and IoT, s
 ## Project Overview
 We aim to automatically detect valve failures (e.g., contamination, leakage) in the MIMII dataset using unsupervised learning, focusing on acoustic signals recorded with an 8-microphone TAMAGO-03 array (16 kHz, 16-bit). Unlike traditional approaches, we denoise multi-channel signals before classification, transforming the array into a "smart sensor" for industrial monitoring. The pipeline is divided into three parts:
 
-- **Part I: Autoencoder Classification** – Train a CNN-based autoencoder on normal valve sounds (6 dB SNR) to flag anomalies via reconstruction errors.
+- **Part I: Autoencoder Classification** – Train a CNN-based autoencoder on normal valve sounds (+6dB SNR) to flag anomalies via reconstruction errors.
 - **Part II: Noise Reduction** – Develop 8-mic beamforming and Ephraim-Malah filtering to isolate valve sounds in noisy factories.
-- **Part III: Comparative Analysis** – Compare autoencoder performance on raw vs. denoised –6 dB valve data, using aligned 1.5s frames.
+- **Part III: Comparative Analysis** – Compare autoencoder performance on raw vs. denoised –6dB SNR valve data, using aligned 1.5s frames.
 
 ### Key Features
 
