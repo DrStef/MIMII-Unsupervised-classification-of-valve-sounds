@@ -63,7 +63,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
 
    
 | <p align="center"> <img src="results\plot\stft_magnitude_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/stft_phase_spectrograms_1p5s_June02_v08.png" width="400"  /> </p> |   
-| ---       |   ---  |   
+|:---:|:---:|   
 | <center> <b><i> Magnitude STFT </i></b> </center> |   <center> <b><i> Unwrap Phase STFT </i></b> </center> |  
 | <p align="center"> <img src="results/plot/acstft_magnitude_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   <p align="center"> <img src="results/plot/acstft_phase_spectrograms_1p5s_July03_v08.png" width="400"  /> </p> |   
 | <center> <b><i> Magnitude AC-STFT </i></b> </center> |   <center> <b><i> Phase AC-STFT </i></b> </center> |  
@@ -98,7 +98,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
    - **Confusion Matrix**: [[119 1], [1 119]] (True Negatives: 119, True Positives: 119)
 
 | <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_History_v01.png" width="350"  /> </p> |   <p align="center"> <img src="results/plot/id04_ModelACSTFT_seed42_RocAuc_v01.png" width="300"  /> </p> |   
-| ---       |   ---  |   
+|:---:|:---:|   
 | <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
 | <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src=".\results\plot\id04_ModelACSTFT_seed42_MSE_v01.png" width="350"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
@@ -117,7 +117,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
   - **Training History**: Loss and validation loss over 40 epochs, showing convergence (plots saved at `C:\Users\drste\Project_IA\Notebooks\path\to\your\results`).
     
 | <p align="center"> <img src="results/plot/UnifiedModelACSTFT_History_v01.png" width="350"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_RocAuc_v01.png" width="300"  /> </p> |   
-| ---       |   ---  |   
+|:---:|:---:|  
 | <center> <b><i> Training History</i></b> </center> |   <center> <b><i> ROC-AUC  </i></b> </center> |  
 | <p align="center"> <img src="results/plot/UnifiedModelACSTFT_CM_v01.png" width="300"  /> </p> |   <p align="center"> <img src="results/plot/UnifiedModelACSTFT_MSE_v01.png" width="350"  /> </p> |   
 | <center> <b><i> Confusion Matrix </i></b> </center> |   <center> <b><i> Reconstruction error (MSE) </i></b> </center> |  
@@ -156,13 +156,13 @@ R=0.068/2 % Radius of the circular array in meter (m)
     RP(8,:)= [Rcos(315pi/180) Rsin(315pi/180) 0.00]
 
 |<p align="center"> <img src="results/plot/Wopt_00deg.png" width="400"  /> </p> |  <p align="center"> <img src="results/plot/DI_00deg_sig5_1em4.png" width="350"  /> </p> |
-|       ---       |         ---       | 
+|:---:|:---:|  
 | <center> <b><i> Optimum filters 000 deg </i></b> </center> | <center> <b><i> Directivity Index </i></b> </center> |       
     
 ####  MVDR beamforming
     
 | <p align="center"> <img src="results/plot/8micsArray_mvdr_DI_z0_freq.png" width="300"  /> </p> |  
-|       ---       |       
+|:---:|
 | <center> <b><i> Directivity v. Frequency - Horizontal plane. </i></b> </center> |     
     
 
@@ -170,7 +170,7 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
     
 |<p align="center"> <img src="results/plot/8micsArray_mvdr_500Hz.png" width="250"  /> </p> |  <p align="center"> <img src="results/plot/8micsArray_mvdr_1000Hz.png" width="250"  /> </p> |   <p align="center"> <img src="results/plot/8micsArray_mvdr_5000Hz.png" width="250"  /> </p>        |
-|       ---       |         ---       |  ---  |
+|:---:|:---:|:---:|  
 | <center> <b><i> Beampattern 500Hz  </i></b> </center> | <center> <b><i> Beampattern 1000Hz </i></b> </center> |   <center> <b><i> Beampattern 5000Hz </i></b> </center>       |
     
    
@@ -178,7 +178,7 @@ The main beam is steered at 000 degrees. In the valve direction. <br>
 
     
 | <p align="center"> <img src="results/plot/GSC_blockdiagram.png" width="400"  /> </p> |  
-| ---       |   
+|:---:|  
 | <center> <b><i> GSC Block-Diagram from [6] </i></b> </center> |       
    
 
@@ -222,7 +222,7 @@ Input 10s recording:  name_audio='id06_n_00000048'  in '-6dB valve dataset'.
     
     
  |<p align="center"> <img src="results/plot/NR_10sClip_mvdr_em_novad.png" width="700"  /> </p> |  
- |       ---       |   
+|:---:|
  | <center> <b><i> MVDR+EM noise reduction.  </i></b> </center> |      
  |   <p align="center"> <img src="results/plot/NR_10sClip_mvdr_em_vad.png" width="700"  /> </p> |
 | <center> <b><i> MVDR+EM noise reduction. With VAD. </i></b> </center> |     
