@@ -72,7 +72,7 @@ We will compare results versus c-STFT: Standard complex STFT (magnitude and unwr
   
 
 - **Training**:
-  - Data: `ids_X_train` (3691 normal, 256x256x2), balanced `ids_X_test` (958: 479 normal + 479 abnormal, seed=25) for the "unified case", (240: 120 normal + 120 abnormal, seed=25).
+  - Data: `ids_X_train` (3691 normal, 256x256x2), balanced `ids_X_test` (958: 479 normal + 479 abnormal, seed=25) for the "unified model" (id_00, id_02, id_04, id_06).  (240: 120 normal + 120 abnormal, seed=25) for the single valve (id_04) model.
   - Initial Run (Stopped, Epoch 10): Overfitting (loss=0.0467, val_loss=0.0848, gap=0.0381, spike to 0.1111).
   - Retraining (June 3, 2025, Ongoing): Improved at Epoch 8 (loss=0.0500, val_loss=0.0529, gap=0.0029, lr=0.0010).
   - Target: val_loss ~0.0500, gap < 0.006, AUC > 0.9 (vs. id_04’s 0.992–0.998).
