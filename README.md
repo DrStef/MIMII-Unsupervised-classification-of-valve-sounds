@@ -13,12 +13,9 @@ Our proprietary AC-STFT transform achieves an ROC AUC of 0.99 on the +6dB valve 
 Targeting applications like predictive maintenance for HVAC systems (e.g., TRANE compressors), the pipeline includes frame alignment for consistent performance in noisy factories. Developed by [bloo audio], ongoing results are showcased on  ([LinkedIn](https://www.linkedin.com/in/sdedieu/)). Explore code, notebooks, and visualizations below.
 
 <i> <b> Important Remark </b> (Oct. 2025):  In the MIMII dataset, the noise and device sounds were recorded separately and then mixed under various SNR conditions: -6 dB, 0 dB, and +6 dB. Unfortunately, in many recordings, the noise likely originates from the 0° direction—the same as the valve— and in some cases, probably in the near field. This causes beamforming to enhance the noise rather than attenuate it. While faulty recordings could be eliminated, this would be tedious. Alternative noise reduction methods could be employed. <br>
-The denoising project for all Valve dataset recordings (especially the SNR=-6dB set) is currently on hold.  <br>
-Instead, we are focusing on the Valve set with SNR = +6 dB and valve type ID04, applying a CNN autoencoder to AC-STFT transforms to identify damaged valves. <br> However, we will still present the noise reduction process with the Valve set SNR=-6dB, using MVDR beamforming + Ephraim-Malah and the Valve Activity Detector. </i>
-
-
-
-
+- The denoising project for all Valve dataset recordings (especially the SNR=-6dB set) is currently on hold.  <br>
+- Instead, we are focusing on the Valve set with SNR = +6 dB and valve type ID04, applying a CNN autoencoder to AC-STFT transforms to identify damaged valves. <br>
+- However, we will still present the noise reduction process with the Valve set SNR=-6dB, using MVDR beamforming + Ephraim-Malah and the Valve Activity Detector. </i>
 
 <br> 
 
