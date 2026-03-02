@@ -8,7 +8,7 @@ $$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection 
 
 **Dr. Stéphane Dedieu** 
 <br>Applied Mathematics | Digital Signal Processing | ML  <br>
-Summer 2025 – update January 2026  <br>
+Summer 2025 – update Jan. Feb. 2026  <br>
 <a href="https://www.linkedin.com/in/sdedieu/">
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="30" height="30">
 </a>
