@@ -13,19 +13,25 @@ Summer 2025 – update January 2026  <br>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="30" height="30">
 </a>
 
+<br><br>
 
 ### Notebooks
 
-[Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder]() 
+
+[Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder with STFT & AC-STFT]() 
+
+This notebook evaluates a CNN autoencoder for unsupervised anomaly detection on valve sounds (MIMII dataset, **+6 dB SNR**), comparing standard STFT (magnitude only, 256×256×1 features) and the custom AC-STFT (magnitude + asymmetric phase, 256×256×2 features).  
+STFT baseline yields modest performance on id_04 (ROC-AUC ≈ 0.67), while AC-STFT achieves near-perfect results on the same valve (ROC-AUC 0.998) and strong generalization in the unified model across id_00, id_02, id_04, id_06 (ROC-AUC 0.948).  
+These results highlight the superior discriminative power of AC-STFT for capturing phase complexity and transients in valve impulse signatures.
 
 [Part II: MIMII Valve -6dB SNR Dataset - Denoising Algorithms](https://github.com/DrStef/MIMII-Unsupervised-classification-of-valve-sounds/blob/main/MIMII-Valve_Dataset_Denoising_Algorithms_PARTII_v00.ipynb) 
 
-This notebook implements noise reduction for MIMII valve sounds (-6 dB SNR) using MVDR beamforming, pseudo-GSC and Ephraim-Malah spectral subtraction, with optional Valve Activity Detection (VAD) for further SNR enhancement.  
+This notebook implements noise reduction for MIMII valve sounds (**-6 dB SNR**) using MVDR beamforming, pseudo-GSC and Ephraim-Malah spectral subtraction, with optional Valve Activity Detection (VAD) for further SNR enhancement.  
 The pipeline effectively cleans signals for downstream analysis. 
 
 
 
-<br><br><br>
+<br><br>
 
 
 ## General Introduction
