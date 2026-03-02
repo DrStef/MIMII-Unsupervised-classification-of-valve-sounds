@@ -2,10 +2,20 @@
 
 $$\small{\textbf{Digital Signal Processing, Deep Learning, and Machine Learning for Unsupervised Anomaly Detection}} $$   
 $$\small{\textbf{Malfunctioning Industrial Machine Investigation and Inspection (MIMII)}}$$
-$$\small{\textbf{Dr. Stéphane DEDIEU,  Summer 2025 }}$$
 
 
 <h1 align="center">MIMII Dataset: Unsupervised Classification of Valve Sounds with CNN-Based Autoencoder</h1>
+
+**Dr. Stéphane Dedieu** 
+<br>Applied Mathematics | Digital Signal Processing | ML  <br>
+Summer 2025 – update January 2026  <br>
+<a href="https://www.linkedin.com/in/sdedieu/">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="30" height="30">
+</a>
+
+
+
+
 
 This repository hosts an unsupervised classification pipeline for detecting valve anomalies in industrial machinery, addressing costly failures through acoustic monitoring with the MIMII dataset (valves, -6 dB, 0 dB, 6 dB SNR; CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388). <br> 
 Unlike traditional MIMII approaches that classify noisy signals directly, we denoise multi-channel audio from an 8-microphone TAMAGO-03 array (16 kHz, 16-bit) using MVDR beamforming and a custom static Generalized Sidelobe Canceler (GSC) with Ephraim-Malah gain, transforming the array into a noise-robust “smart sensor.” <br> 
