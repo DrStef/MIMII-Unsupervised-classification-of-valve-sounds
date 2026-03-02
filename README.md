@@ -13,14 +13,22 @@ Summer 2025 – update January 2026  <br>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="30" height="30">
 </a>
 
+
 ### Notebooks
 
 [Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder]() 
 
-  
 [Part II: MIMII Valve -6dB SNR Dataset - Denoising Algorithms](https://github.com/DrStef/MIMII-Unsupervised-classification-of-valve-sounds/blob/main/MIMII-Valve_Dataset_Denoising_Algorithms_PARTII_v00.ipynb) 
 
+This notebook implements noise reduction for MIMII valve sounds (-6 dB SNR) using MVDR beamforming, pseudo-GSC and Ephraim-Malah spectral subtraction, with optional Valve Activity Detection (VAD) for further SNR enhancement.  
+The pipeline effectively cleans signals for downstream analysis. 
 
+
+
+<br><br><br>
+
+
+## General Introduction
 
 This repository hosts an unsupervised classification pipeline for detecting valve anomalies in industrial machinery, addressing costly failures through acoustic monitoring with the MIMII dataset (valves, -6 dB, 0 dB, 6 dB SNR; CC BY-SA 4.0, Hitachi, Ltd., https://zenodo.org/records/3384388). <br> 
 Unlike traditional MIMII approaches that classify noisy signals directly, we denoise multi-channel audio from an 8-microphone TAMAGO-03 array (16 kHz, 16-bit) using MVDR beamforming and a custom static Generalized Sidelobe Canceler (GSC) with Ephraim-Malah gain, transforming the array into a noise-robust “smart sensor.” <br> 
