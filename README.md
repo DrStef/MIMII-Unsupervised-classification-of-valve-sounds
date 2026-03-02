@@ -13,7 +13,12 @@ Summer 2025 – update January 2026  <br>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" width="30" height="30">
 </a>
 
+### Notebooks
 
+[Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder]() 
+
+  
+[Part II: MIMII Valve -6dB SNR Dataset - Denoising Algorithms](https://github.com/DrStef/MIMII-Unsupervised-classification-of-valve-sounds/blob/main/MIMII-Valve_Dataset_Denoising_Algorithms_PARTII_v00.ipynb) 
 
 
 
