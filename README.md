@@ -18,7 +18,7 @@ Summer 2025 – update Jan. Feb. 2026  <br>
 ### Notebooks
 
 
-[Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder with STFT & AC-STFT]() 
+[Part I: MIMII Valve +6dB SNR Dataset - CNN Autoencoder with STFT & AC-STFT](https://github.com/DrStef/MIMII-Unsupervised-classification-of-valve-sounds/blob/main/MIMII-Dataset_AutoencoderValveData_SNR%2B6dB_PARTI_v00.ipynb) 
 
 This notebook evaluates a CNN autoencoder for unsupervised anomaly detection on valve sounds (MIMII dataset, **+6 dB SNR**), comparing standard STFT (magnitude only, 256×256×1 features) and the custom AC-STFT (magnitude + asymmetric phase, 256×256×2 features).  
 STFT baseline yields modest performance on id_04 (ROC-AUC ≈ 0.67), while AC-STFT achieves near-perfect results on the same valve (ROC-AUC 0.998) and strong generalization in the unified model across id_00, id_02, id_04, id_06 (ROC-AUC 0.948).  
